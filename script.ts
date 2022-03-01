@@ -3,31 +3,35 @@ declare var Vue:any;
     Vue.createApp({
         data() {
             return {
-                
-                rows: [{
-                    workoutCounter: 3,
-                    weight: "",
-                    date: new Date().toISOString().slice(0,10)                                              
-                }],
+                workoutCounter: 3,
+                reps:0,
+                rows: [{                    
+                        weight: "",
+                        date: new Date().toISOString().slice(0, 10),
+                        sets: "",
+    
+                    }]
             };
         },
         methods: {
-            setStartingWeight(){
-                this.rows[0].weight= this.startWeight
+            setStartingWeight: function () {
+                this.rows[0].weight = this.startWeight;
             },
-            endWorkout(){
+            endWorkout: function () {
                 // this.rows.weight = this.startingWeight
-                
+                this.workoutCounter ++;
+                // this.rows[0].weight = this.rows[0].weight+5;
+                let newWeight=0
+                if (this.reps >5) {
+                    newWeight = this.rows[0].weight+5;
+                }
                 this.rows.push({
-                    workoutCounter: this.workoutCounter += 2,
-                    weight: this.startWeight,                    
-                    date: new Date().toISOString().slice(0,10)                
+                    weight: newWeight,
+                    date: new Date().toISOString().slice(0, 10),
+                    sets: 5,
                 });
-                
-            },
-            
+            }
         }
-
     }).mount('main');
     
        

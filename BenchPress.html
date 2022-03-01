@@ -41,9 +41,12 @@
 <br><br>
 <button @click="endWorkout()">End workout</button>
 <h2>addItem</h2>
-      <ul>
+      <ol><br><br>
         <li v-for="(row, index) in rows" :key="index">
-        <p>a p here to</p>
+          
+        <p>Workout</p>
+       
+         
         <table>
           <thead>
             <tr>
@@ -62,34 +65,15 @@
             <th>Weight</th>
             <th>Reps</th>
           </tr>
-          <tr>
-            <td>1</td>
+          <tr  v-for="(set, index) in row.sets" :key="index">
+            <td>{{set}}</td>
             <td>{{row.weight}}</td>
-            <td><input type="text" value="6"></td>
+            <td><input type="text" v-model="reps"></td>
           </tr>
-          <tr>
-            <td>2</td>
-            <td>{{row.weight}}</td>
-            <td><input type="text" value="6"></td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>{{row.weight}}</td>
-            <td><input type="text" value="5"></td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>{{row.weight}}</td>
-            <td><input type="text" value="5"></td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>{{row.weight}}</td>
-            <td><input type="text" value="5"></td>
-          </tr>
+         
         </table>
         </li>
-      </ul>
+      </ol>
 
 
    
