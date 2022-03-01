@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SRP Bench</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/vue@3" defer></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <header id="header">
+    <h1>SRP (Set Row Progression)</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="BenchPress.html">BenchPress</a></li>
+        <li><a href="Squat.html">Squat</a></li>
+        <li><a href="Deadlift.html">Deadlift</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- input and enter -->
+    <!-- <input v-model="newItem" @keyup.enter="endWorkout()" type="text" placeholder="add item"> -->
+
+
+    <div id="start">
+
+      <label for="">Starting weight for 5x5:</label>
+      <input id='startWeight' v-model="startWeight" type="text" >
+      <button id='startWeightBtn' @click="setStartingWeight()">Set Weight</button>
+
+    </div>
+<br><br>
+<br><br>
+<button @click="endWorkout()">End workout</button>
+<h2>addItem</h2>
+      <ul>
+        <li v-for="(row, index) in rows" :key="index">
+        <p>a p here to</p>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Workout</th>
+              <th id="totalKg" scope="col">Total</th>
+              <th scope="col">Date</th>
+            </tr>
+            <tr>
+              <th scope="col">{{row.workoutCounter}}</th>
+              <th id="firstTotal" scope="col">000</th>
+              <th scope="col">{{row.date}}</th>
+            </tr>
+          </thead>
+          <tr>
+            <th>Set</th>
+            <th>Weight</th>
+            <th>Reps</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>{{row.weight}}</td>
+            <td><input type="text" value="6"></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>{{row.weight}}</td>
+            <td><input type="text" value="6"></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>{{row.weight}}</td>
+            <td><input type="text" value="5"></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>{{row.weight}}</td>
+            <td><input type="text" value="5"></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>{{row.weight}}</td>
+            <td><input type="text" value="5"></td>
+          </tr>
+        </table>
+        </li>
+      </ul>
+
+
+   
+    <footer></footer>
+
+  </main>
+  </body>
+  
+  </html>
+
+    
