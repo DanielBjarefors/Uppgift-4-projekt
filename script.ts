@@ -3,8 +3,9 @@ declare var Vue:any;
     Vue.createApp({
         data() {
             return {
-                workoutCounter: 1,
+                
                 rows: [{
+                    workoutCounter: 3,
                     weight: "",
                     date: new Date().toISOString().slice(0,10)                                              
                 }],
@@ -16,11 +17,13 @@ declare var Vue:any;
             },
             endWorkout(){
                 // this.rows.weight = this.startingWeight
+                
                 this.rows.push({
-                    weight: this.startWeight,
-                    workoutCounter: this.workoutCounter +1,
+                    workoutCounter: this.workoutCounter += 2,
+                    weight: this.startWeight,                    
                     date: new Date().toISOString().slice(0,10)                
                 });
+                
             },
             
         }
