@@ -28,8 +28,8 @@ body, #start, main, .form {
     margin: 5px 5px;  
     text-align: center;  
 }
-input, button{
-  width: 66px;
+input{
+  width: 40px;
   text-align: center;
   margin:10px; 
 }

@@ -17,7 +17,7 @@ declare var Vue:any;
                 const copy1 = Object.assign({}, this.startWeight);                
                 const copy2 = Object.assign({}, this.reps);                
 
-                this.items.push({
+                this.items.unshift({
                     startWeight: copy1 ,
                     reps: copy2
                 }),
@@ -31,9 +31,15 @@ declare var Vue:any;
                 );
                 this.startWeight.splice(0,5);
                 this.reps.splice(0,5);
-
+                this.reps.push( { set1: 5 }, { set2: 5 }, { set3: 5 }, { set4: 5 }, { set5: 5 })
+                this.reps.set1 =5;
+                this.reps.set2 =5;
+                this.reps.set3 =5;
+                this.reps.set4 =5;
+                this.reps.set5 =5;
               },
             setStartingWeight(){
+                this.startWeight.splice(0,5);
                 this.startWeight.push(
                     this.newWeight,
                     this.newWeight,
@@ -42,9 +48,28 @@ declare var Vue:any;
                     this.newWeight
                 );
                 this.newItem = "";
+                
+
+            },
+            setUnits() {
+                this.startWeight[0]=0;
+                this.startWeight[1]=0;
+                this.startWeight[2]=0;
+                this.startWeight[3]=0;
+                this.startWeight[4]=0;
+                this.reps.set1=5;
+                this.reps.set2=5;
+                this.reps.set3=5;
+                this.reps.set4=5;
+                this.reps.set5=5;
+                this.newWeight=100;
             }
             
-        }
+        },
+        beforeMount(){
+            this.setUnits()
+         }
+
 
     }).mount('main');
 
