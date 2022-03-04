@@ -1,6 +1,7 @@
 //graph from API
-//local storage for each workout
+//html layout
 //finishing CSS
+//try loops
 Vue.createApp({
     data: function () {
         return {
@@ -18,7 +19,6 @@ Vue.createApp({
         };
     },
     methods: {
-        // set to clear one workout only
         clearAll: function () {
             window.localStorage.removeItem('items' + this.id);
             window.localStorage.removeItem('startWeight' + this.id);
