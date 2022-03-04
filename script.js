@@ -1,5 +1,5 @@
 //graph from API
-//local storage
+//local storage for each workout
 //finishing CSS
 Vue.createApp({
     data: function () {
@@ -7,18 +7,24 @@ Vue.createApp({
             newItem: [],
             startWeight: [],
             reps: [{ set1: 0 }, { set2: 0 }, { set3: 0 }, { set4: 0 }, { set5: 0 }],
-            newWeight: '',
+            newWeight: "",
             items: [],
             date: new Date().toISOString().slice(0, 10),
             total: 0,
             workoutNr: 1,
             toggle: false,
-            saveData: []
+            saveData: [],
+            id: ""
         };
     },
     methods: {
+        // set to clear one workout only
         clearAll: function () {
-            window.localStorage.removeItem("user");
+            window.localStorage.removeItem('items' + this.id);
+            window.localStorage.removeItem('startWeight' + this.id);
+            window.localStorage.removeItem('workoutNr' + this.id);
+            window.localStorage.removeItem('total' + this.id);
+            window.location.reload();
         },
         saveItem: function () {
             var copy1 = Object.assign({}, this.startWeight);
@@ -46,10 +52,10 @@ Vue.createApp({
             this.reps.set3 = 5;
             this.reps.set4 = 5;
             this.reps.set5 = 5;
-            window.localStorage.setItem('items', JSON.stringify(this.items));
-            window.localStorage.setItem('startWeight', JSON.stringify(this.startWeight));
-            window.localStorage.setItem('workoutNr', JSON.stringify(this.workoutNr));
-            window.localStorage.setItem('total', JSON.stringify(this.total));
+            window.localStorage.setItem('items' + this.id, JSON.stringify(this.items));
+            window.localStorage.setItem('startWeight' + this.id, JSON.stringify(this.startWeight));
+            window.localStorage.setItem('workoutNr' + this.id, JSON.stringify(this.workoutNr));
+            window.localStorage.setItem('total' + this.id, JSON.stringify(this.total));
         },
         setStartingWeight: function () {
             this.startWeight.splice(0, 5);
@@ -61,12 +67,13 @@ Vue.createApp({
             this.toggle = !this.toggle;
         },
         setUnits: function () {
-            var check = JSON.parse(window.localStorage.getItem('items'));
+            //shorten
+            var check = JSON.parse(window.localStorage.getItem('items' + this.id));
             if (check !== null) {
-                this.items = JSON.parse(window.localStorage.getItem('items'));
-                this.startWeight = JSON.parse(window.localStorage.getItem('startWeight'));
-                this.workoutNr = JSON.parse(window.localStorage.getItem('workoutNr'));
-                this.total = JSON.parse(window.localStorage.getItem('total'));
+                this.items = JSON.parse(window.localStorage.getItem('items' + this.id));
+                this.startWeight = JSON.parse(window.localStorage.getItem('startWeight' + this.id));
+                this.workoutNr = JSON.parse(window.localStorage.getItem('workoutNr' + this.id));
+                this.total = JSON.parse(window.localStorage.getItem('total' + this.id));
             }
             else {
                 this.startWeight[0] = 0;
@@ -78,9 +85,6 @@ Vue.createApp({
             if (check !== null) {
                 this.toggle = true;
             }
-            // this.total = this.items
-            this.startWeight;
-            this.workoutNr;
             this.reps.set1 = 5;
             this.reps.set2 = 5;
             this.reps.set3 = 5;
@@ -89,7 +93,8 @@ Vue.createApp({
             this.newWeight = 100;
         }
     },
-    beforeMount: function () {
+    mounted: function () {
+        this.id = this.$refs.id.innerHTML.slice(0, 5);
         this.setUnits();
     }
 }).mount('main');

@@ -20,13 +20,15 @@
         <li><a href="BenchPress.html">BenchPress</a></li>
         <li><a href="Squat.html">Squat</a></li>
         <li><a href="Deadlift.html">Deadlift</a></li>
-        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <h1>Deadlift Workout</h1>
+    <button @click="clearAll"> Clear workouts</button>
+
+    <h1 ref="id">Deadlift Workout</h1>
+
     <div class="hide" v-show='!toggle'>
       <h3>Set weight for 5x5.</h3>
 
