@@ -1,26 +1,40 @@
+//graph from API
+//local storage
+//hide unhide table/set weight
+//add date to table
+//counter for workouts
 Vue.createApp({
     data: function () {
         return {
-            header: 'Shopping List App',
             newItem: [],
             startWeight: [],
             reps: [{ set1: 0 }, { set2: 0 }, { set3: 0 }, { set4: 0 }, { set5: 0 }],
             newWeight: '',
-            items: []
+            items: [],
+            date: new Date().toISOString().slice(0, 10),
+            total: 0,
+            workoutNr: 0
         };
     },
     methods: {
         saveItem: function () {
             var copy1 = Object.assign({}, this.startWeight);
             var copy2 = Object.assign({}, this.reps);
+            var copy3 = JSON.parse(JSON.stringify(this.date));
+            var copy4 = this.total;
             this.items.unshift({
                 startWeight: copy1,
-                reps: copy2
+                reps: copy2,
+                date: copy3,
+                total: copy4
             }),
                 this.startWeight.push(this.reps.set1 > 5 ? this.startWeight[0] + 5 : this.startWeight[0], this.reps.set2 > 5 ? this.startWeight[1] + 5 : this.startWeight[1], this.reps.set3 > 5 ? this.startWeight[2] + 5 : this.startWeight[2], this.reps.set4 > 5 ? this.startWeight[3] + 5 : this.startWeight[3], this.reps.set5 > 5 ? this.startWeight[4] + 5 : this.startWeight[4]);
             this.startWeight.splice(0, 5);
+            this.total = 0;
+            for (var i = 0; i < this.startWeight.length; i++) {
+                this.total += this.startWeight[i];
+            }
             this.reps.splice(0, 5);
-            this.reps.push({ set1: 5 }, { set2: 5 }, { set3: 5 }, { set4: 5 }, { set5: 5 });
             this.reps.set1 = 5;
             this.reps.set2 = 5;
             this.reps.set3 = 5;
@@ -31,6 +45,9 @@ Vue.createApp({
             this.startWeight.splice(0, 5);
             this.startWeight.push(this.newWeight, this.newWeight, this.newWeight, this.newWeight, this.newWeight);
             this.newItem = "";
+            for (var i = 0; i < this.startWeight.length; i++) {
+                this.total += this.startWeight[i];
+            }
         },
         setUnits: function () {
             this.startWeight[0] = 0;

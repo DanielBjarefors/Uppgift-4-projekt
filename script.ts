@@ -1,25 +1,39 @@
 declare var Vue:any;
+//graph from API
+//local storage
+//hide unhide table/set weight
+//add date to table
+//counter for workouts
 
     Vue.createApp({
         data() {
-            return {
-                header: 'Shopping List App',
+            return {                
                 newItem: [],
                 startWeight: [],
                 reps:[{ set1: 0 }, { set2: 0 }, { set3: 0 }, { set4: 0 }, { set5: 0 }],
                 newWeight: '',
-                items:[]
+                items:[],
+                date: new Date().toISOString().slice(0,10),
+                total: 0,
+                workoutNr:0
             };
         },
         methods: {
             saveItem(){
+                
+                
+               
 
                 const copy1 = Object.assign({}, this.startWeight);                
                 const copy2 = Object.assign({}, this.reps);                
+                const copy3 = JSON.parse(JSON.stringify( this.date));                
+                const copy4 = this.total;                
 
                 this.items.unshift({
                     startWeight: copy1 ,
-                    reps: copy2
+                    reps: copy2,
+                    date: copy3,
+                    total: copy4
                 }),
                                 
                 this.startWeight.push(
@@ -29,9 +43,15 @@ declare var Vue:any;
                     this.reps.set4>5?this.startWeight[3]+5:this.startWeight[3],
                     this.reps.set5>5?this.startWeight[4]+5:this.startWeight[4]                   
                 );
+               
                 this.startWeight.splice(0,5);
+
+                this.total = 0;
+                for (let i = 0; i < this.startWeight.length; i++) {
+                    this.total+= this.startWeight[i];                    
+                }
+                
                 this.reps.splice(0,5);
-                this.reps.push( { set1: 5 }, { set2: 5 }, { set3: 5 }, { set4: 5 }, { set5: 5 })
                 this.reps.set1 =5;
                 this.reps.set2 =5;
                 this.reps.set3 =5;
@@ -48,7 +68,11 @@ declare var Vue:any;
                     this.newWeight
                 );
                 this.newItem = "";
-                
+
+                for (let i = 0; i < this.startWeight.length; i++) {
+                    this.total+= this.startWeight[i];
+                    
+                }
 
             },
             setUnits() {
@@ -57,11 +81,13 @@ declare var Vue:any;
                 this.startWeight[2]=0;
                 this.startWeight[3]=0;
                 this.startWeight[4]=0;
+
                 this.reps.set1=5;
                 this.reps.set2=5;
                 this.reps.set3=5;
                 this.reps.set4=5;
                 this.reps.set5=5;
+
                 this.newWeight=100;
             }
             

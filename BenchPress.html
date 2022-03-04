@@ -25,12 +25,10 @@
     </nav>
   </header>
 
-  <main>
-    <!-- input and enter -->
-    <!-- <input v-model="newItem" @keyup.enter="endWorkout()" type="text" placeholder="add item"> -->
+  <main>    
 
-
-    <h1>{{ header || 'Welcome' }}</h1>
+    <h3>Set weight for 5x5.</h3>
+    
     <div class="form">
      
       <input type="number" v-model.number="newWeight" placeholder="Weight">
@@ -39,6 +37,12 @@
       </button>
       
       <table>
+        <tr>
+          <th>Date:</th> <th></th>  <th>{{date}}</th>
+        </tr>
+        <tr>
+          <th>Total:</th>  <th>{{total}}</th>
+        </tr>
         <tr>
           <th>Set</th> <th>Weight</th> <th>Reps</th>
         </tr>
@@ -78,6 +82,12 @@
     <ul>
       <li v-for="item in items" :key="item.id">
         <table>
+          <tr>
+            <th>Date:</th> <th></th> <th>{{item.date}}</th>
+          </tr>
+          <tr>
+            <th>Total:</th> <th>{{item.total}}</th> <th></th>
+          </tr>
           <tr>
             <th>Set</th> <th>Weight</th> <th>Reps</th>
           </tr>
