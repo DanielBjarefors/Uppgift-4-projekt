@@ -1,9 +1,9 @@
 declare var Vue:any;
 //graph from API
 //local storage
-//hide unhide table/set weight
-//add date to table
-//counter for workouts
+//finishing CSS
+
+
 
     Vue.createApp({
         data() {
@@ -15,27 +15,38 @@ declare var Vue:any;
                 items:[],
                 date: new Date().toISOString().slice(0,10),
                 total: 0,
-                workoutNr:0
+                workoutNr:1,
+                toggle: false,
+                saveData: []
             };
         },
-        methods: {
-            saveItem(){
+        methods: {     
+            
+            clearAll(){
+                window.localStorage.removeItem("user")
+
+            },
+
+            saveItem(){  
+
                 
-                
-               
 
                 const copy1 = Object.assign({}, this.startWeight);                
                 const copy2 = Object.assign({}, this.reps);                
                 const copy3 = JSON.parse(JSON.stringify( this.date));                
                 const copy4 = this.total;                
+                const copy5 = this.workoutNr;                
 
                 this.items.unshift({
                     startWeight: copy1 ,
                     reps: copy2,
                     date: copy3,
-                    total: copy4
+                    total: copy4,
+                    workoutNr: copy5
                 }),
-                                
+                      
+                this.workoutNr++;
+
                 this.startWeight.push(
                     this.reps.set1>5?this.startWeight[0]+5:this.startWeight[0],
                     this.reps.set2>5?this.startWeight[1]+5:this.startWeight[1],
@@ -57,7 +68,17 @@ declare var Vue:any;
                 this.reps.set3 =5;
                 this.reps.set4 =5;
                 this.reps.set5 =5;
+
+                
+                
+                window.localStorage.setItem('items', JSON.stringify(this.items));
+                window.localStorage.setItem('startWeight', JSON.stringify(this.startWeight));
+                window.localStorage.setItem('workoutNr', JSON.stringify(this.workoutNr));
+                window.localStorage.setItem('total', JSON.stringify(this.total));
+
               },
+
+
             setStartingWeight(){
                 this.startWeight.splice(0,5);
                 this.startWeight.push(
@@ -73,15 +94,41 @@ declare var Vue:any;
                     this.total+= this.startWeight[i];
                     
                 }
+                this.toggle = !this.toggle;
 
             },
-            setUnits() {
-                this.startWeight[0]=0;
-                this.startWeight[1]=0;
-                this.startWeight[2]=0;
-                this.startWeight[3]=0;
-                this.startWeight[4]=0;
 
+
+            setUnits() {
+              
+                let check =JSON.parse(window.localStorage.getItem('items'));
+               
+               
+                if (check!==null) {
+                    this.items = JSON.parse(window.localStorage.getItem('items'));
+                    this.startWeight = JSON.parse(window.localStorage.getItem('startWeight'));
+                    this.workoutNr = JSON.parse(window.localStorage.getItem('workoutNr'));
+                    this.total = JSON.parse(window.localStorage.getItem('total'));
+             
+                }
+                else{
+                    this.startWeight[0]=0;
+                    this.startWeight[1]=0;
+                    this.startWeight[2]=0;
+                    this.startWeight[3]=0;
+                    this.startWeight[4]=0;
+
+                }
+                
+                if (check!==null) {
+                    this.toggle = true;
+                }
+                
+                // this.total = this.items
+                this.startWeight
+                this.workoutNr
+
+                
                 this.reps.set1=5;
                 this.reps.set2=5;
                 this.reps.set3=5;
@@ -89,6 +136,8 @@ declare var Vue:any;
                 this.reps.set5=5;
 
                 this.newWeight=100;
+                
+                
             }
             
         },
@@ -98,75 +147,3 @@ declare var Vue:any;
 
 
     }).mount('main');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // Vue.createApp({
-    //     data() {
-    //         return {
-    //             workoutCounter: 1,
-    //             weight:[101,102,103,104,105],
-    //                 set1:0,set2:0,set3:0,set4:0,set5:0,
-    //                 date: new Date().toISOString().slice(0,10)  ,
-    //             rows: [{
-    //                 weight:[101,102,103,104,105],
-    //                 rep:[6,7,5,4,3],
-    //                 date: new Date().toISOString().slice(0,10)                                              
-    //             }],
-    //         };
-    //     },
-    //     methods: {
-    //         setStartingWeight(){
-    //             this.rows[0].weight= this.startWeight
-    //         },
-    //         endWorkout(){
-    //             // this.rows.weight = this.startingWeight
-    //             this.rows.push({
-    //                 weight: [101,102,103,104,107],
-    //                 rep:  [this.set1,this.set2,this.set3,this.set4,this.set5],
-    //                 workoutCounter: this.workoutCounter +1,
-    //                 date: new Date().toISOString().slice(0,10)
-                                  
-    //             });
-    //         },
-            
-    //     }
-
-    // }).mount('main');
-    
-       
