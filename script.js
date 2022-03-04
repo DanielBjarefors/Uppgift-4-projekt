@@ -2,10 +2,10 @@
 //html layout
 //finishing CSS
 //try loops
+//better names for variables
 Vue.createApp({
     data: function () {
         return {
-            newItem: [],
             startWeight: [],
             reps: [{ set1: 0 }, { set2: 0 }, { set3: 0 }, { set4: 0 }, { set5: 0 }],
             newWeight: "",
@@ -14,7 +14,6 @@ Vue.createApp({
             total: 0,
             workoutNr: 1,
             toggle: false,
-            saveData: [],
             id: ""
         };
     },
@@ -60,7 +59,6 @@ Vue.createApp({
         setStartingWeight: function () {
             this.startWeight.splice(0, 5);
             this.startWeight.push(this.newWeight, this.newWeight, this.newWeight, this.newWeight, this.newWeight);
-            this.newItem = "";
             for (var i = 0; i < this.startWeight.length; i++) {
                 this.total += this.startWeight[i];
             }
