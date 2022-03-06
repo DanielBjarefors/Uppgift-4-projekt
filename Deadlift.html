@@ -30,78 +30,26 @@
     <h1 ref="id">Deadlift Workout</h1>
 
     <div class="hide" v-show='!toggle'>
-      <h3>Set weight for 5x5.</h3>
-
-      <input type="number" v-model.number="newWeight" placeholder="Weight">
-      <button @click="setStartingWeight" class="btn btn-primary">
-        Set starting weight
-      </button>
-    </div>
-    <div class="hide" v-show='toggle'>
-      <table>
-        <tr>
-          <th>Date:</th>
-          <th colspan="2">{{date}}</th>
-        </tr>
-        <tr>
-          <th>workout nr:</th>
-          <th colspan="2">{{workoutNr}}</th>
-        </tr>
-        <tr>
-          <th>Total:</th>
-          <th colspan="2">{{total}}</th>
-        </tr>
-        <tr>
-          <th>Set</th>
-          <th>Weight</th>
-          <th>Reps</th>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td v-model.number="startWeight[0]">{{startWeight[0]}}</td>
-          <td><input type="number" v-model.number="reps.set1" placeholder="Reps"></td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td v-model.number="startWeight[1]">{{startWeight[1]}}</td>
-          <td><input type="number" v-model.number="reps.set2" placeholder="Reps"></td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td v-model.number="startWeight[2]">{{startWeight[2]}}</td>
-          <td><input type="number" v-model.number="reps.set3" placeholder="Reps"></td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td v-model.number="startWeight[3]">{{startWeight[3]}}</td>
-          <td><input type="number" v-model.number="reps.set4"></td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td v-model.number="startWeight[4]">{{startWeight[4]}}</td>
-          <td><input type="number" v-model.number="reps.set5" placeholder="Reps"></td>
-        </tr>
-      </table>
-
-      <button @click="saveItem" class="btn btn-primary">
-        End Workout
-      </button>
-    </div>
-
-    <ul>
-      <li v-for="item in items" :key="item.id">
+        <h3>Set weight for 5x5.</h3>
+  
+        <input type="number" v-model.number="newWeight" placeholder="Weight">
+        <button @click="setStartingWeight" class="btn btn-primary">
+          Set starting weight
+        </button>
+      </div>
+      <div class="hide" v-show='toggle'>
         <table>
           <tr>
             <th>Date:</th>
-            <th colspan="2">{{item.date}}</th>
+            <th colspan="2">{{date}}</th>
           </tr>
           <tr>
             <th>workout nr:</th>
-            <th colspan="2">{{item.workoutNr}}</th>
+            <th colspan="2">{{workoutNr}}</th>
           </tr>
           <tr>
             <th>Total:</th>
-            <th colspan="2">{{item.total}}</th>
+            <th colspan="2">{{total}}</th>
           </tr>
           <tr>
             <th>Set</th>
@@ -110,36 +58,88 @@
           </tr>
           <tr>
             <td>1</td>
-            <td>{{item.startWeight[0]}}</td>
-            <td>{{item.reps.set1}}</td>
+            <td>{{startWeight[0]}}</td>
+            <td><input type="number" v-model.number="reps[0]" placeholder="Reps"></td>
           </tr>
           <tr>
             <td>2</td>
-            <td>{{item.startWeight[1]}}</td>
-            <td>{{item.reps.set2}}</td>
+            <td>{{startWeight[1]}}</td>
+            <td><input type="number" v-model.number="reps[1]" placeholder="Reps"></td>
           </tr>
           <tr>
             <td>3</td>
-            <td>{{item.startWeight[2]}}</td>
-            <td>{{item.reps.set3}}</td>
+            <td>{{startWeight[2]}}</td>
+            <td><input type="number" v-model.number="reps[2]" placeholder="Reps"></td>
           </tr>
           <tr>
             <td>4</td>
-            <td>{{item.startWeight[3]}}</td>
-            <td>{{item.reps.set4}}</td>
+            <td>{{startWeight[3]}}</td>
+            <td><input type="number" v-model.number="reps[3]"></td>
           </tr>
           <tr>
             <td>5</td>
-            <td>{{item.startWeight[4]}}</td>
-            <td>{{item.reps.set5}}</td>
+            <td>{{startWeight[4]}}</td>
+            <td><input type="number" v-model.number="reps[4]" placeholder="Reps"></td>
           </tr>
         </table>
-      </li>
-    </ul>
-    </div>
-
-
-  </main>
-</body>
-
-</html>
+  
+        <button @click="saveItem" class="btn btn-primary">
+          End Workout
+        </button>
+      </div>
+  
+      <ul>
+        <li v-for="item in items" :key="item.id">
+          <table>
+            <tr>
+              <th>Date:</th>
+              <th colspan="2">{{item.date}}</th>
+            </tr>
+            <tr>
+              <th>workout nr:</th>
+              <th colspan="2">{{item.workoutNr}}</th>
+            </tr>
+            <tr>
+              <th>Total:</th>
+              <th colspan="2">{{item.total}}</th>
+            </tr>
+            <tr>
+              <th>Set</th>
+              <th>Weight</th>
+              <th>Reps</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>{{item.startWeight[0]}}</td>
+              <td>{{item.reps[0]}}</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>{{item.startWeight[1]}}</td>
+              <td>{{item.reps[1]}}</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>{{item.startWeight[2]}}</td>
+              <td>{{item.reps[2]}}</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>{{item.startWeight[3]}}</td>
+              <td>{{item.reps[3]}}</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>{{item.startWeight[4]}}</td>
+              <td>{{item.reps[4]}}</td>
+            </tr>
+          </table>
+        </li>
+      </ul>
+      </div>
+  
+  
+    </main>
+  </body>
+  
+  </html>

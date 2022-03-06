@@ -2,7 +2,6 @@ declare var Vue: any;
 //graph from API
 //html layout
 //finishing CSS
-//try loops
 //better names for variables
 
 
@@ -11,7 +10,7 @@ Vue.createApp({
     data() {
         return {
             startWeight: [],
-            reps: [{ set1: 0 }, { set2: 0 }, { set3: 0 }, { set4: 0 }, { set5: 0 }],
+            reps: [],
             newWeight: "",
             items: [],
             date: new Date().toISOString().slice(0, 10),
@@ -33,9 +32,6 @@ Vue.createApp({
         },
 
         saveItem() {
-
-
-
             const copy1 = Object.assign({}, this.startWeight);
             const copy2 = Object.assign({}, this.reps);
             const copy3 = JSON.parse(JSON.stringify(this.date));
@@ -50,109 +46,65 @@ Vue.createApp({
                 workoutNr: copy5
             }),
 
-                this.workoutNr++;
+            this.workoutNr++;
 
-            this.startWeight.push(
-                this.reps.set1 > 5 ? this.startWeight[0] + 5 : this.startWeight[0],
-                this.reps.set2 > 5 ? this.startWeight[1] + 5 : this.startWeight[1],
-                this.reps.set3 > 5 ? this.startWeight[2] + 5 : this.startWeight[2],
-                this.reps.set4 > 5 ? this.startWeight[3] + 5 : this.startWeight[3],
-                this.reps.set5 > 5 ? this.startWeight[4] + 5 : this.startWeight[4]
-            );
-
-            this.startWeight.splice(0, 5);
+            for (let i = 0; i < this.startWeight.length; i++) {
+                this.reps[i] > 5 ? this.startWeight[i] += 5 : this.startWeight[i]
+            }
 
             this.total = 0;
             for (let i = 0; i < this.startWeight.length; i++) {
                 this.total += this.startWeight[i];
             }
 
-            this.reps.splice(0, 5);
-            this.reps.set1 = 5;
-            this.reps.set2 = 5;
-            this.reps.set3 = 5;
-            this.reps.set4 = 5;
-            this.reps.set5 = 5;
-
-
+            for (let i = 0; i < this.reps.length; i++) {
+                this.reps[i] = 5
+            }
 
             window.localStorage.setItem('items' + this.id, JSON.stringify(this.items));
             window.localStorage.setItem('startWeight' + this.id, JSON.stringify(this.startWeight));
             window.localStorage.setItem('workoutNr' + this.id, JSON.stringify(this.workoutNr));
             window.localStorage.setItem('total' + this.id, JSON.stringify(this.total));
-
         },
 
 
         setStartingWeight() {
-            this.startWeight.splice(0, 5);
-            this.startWeight.push(
-                this.newWeight,
-                this.newWeight,
-                this.newWeight,
-                this.newWeight,
-                this.newWeight
-            );
-            
+            //Fill empty array for first workout
+            for (let i = 0; i < 5; i++) {
+                this.startWeight[i] = this.newWeight
+            }
+
             for (let i = 0; i < this.startWeight.length; i++) {
                 this.total += this.startWeight[i];
-
             }
             this.toggle = !this.toggle;
-
         },
 
 
         setUnits() {
-
-
-
-            //shorten
             let check = JSON.parse(window.localStorage.getItem('items' + this.id));
-
             if (check !== null) {
                 this.items = JSON.parse(window.localStorage.getItem('items' + this.id));
                 this.startWeight = JSON.parse(window.localStorage.getItem('startWeight' + this.id));
                 this.workoutNr = JSON.parse(window.localStorage.getItem('workoutNr' + this.id));
                 this.total = JSON.parse(window.localStorage.getItem('total' + this.id));
-
-            }
-            else {
-                this.startWeight[0] = 0;
-                this.startWeight[1] = 0;
-                this.startWeight[2] = 0;
-                this.startWeight[3] = 0;
-                this.startWeight[4] = 0;
-
             }
 
             if (check !== null) {
                 this.toggle = true;
             }
-
-            this.reps.set1 = 5;
-            this.reps.set2 = 5;
-            this.reps.set3 = 5;
-            this.reps.set4 = 5;
-            this.reps.set5 = 5;
-
+            //Fill empty array for first workout
+            for (let i = 0; i < 5; i++) {
+                this.reps[i] = 5
+            }
             this.newWeight = 100;
-
-
         }
 
     },
 
     mounted() {
-
         this.id = this.$refs.id.innerHTML.slice(0, 5)
         this.setUnits()
     },
-
-
-    // beforeMount(){
-    //     this.setUnits()
-    //  }
-
 
 }).mount('main');
