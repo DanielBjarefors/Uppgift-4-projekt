@@ -32,7 +32,7 @@
     <div class="hide" v-show='!toggle'>
       <h3>Set weight for 5x5.</h3>
 
-      <input type="number" v-model.number="newWeight" placeholder="Weight">
+      <input type="number" v-model.number="startWeight" placeholder="Weight">
       <button @click="setStartingWeight" class="btn btn-primary">
         Set starting weight
       </button>
@@ -58,50 +58,50 @@
         </tr>
         <tr>
           <td>1</td>
-          <td>{{startWeight[0]}}</td>
+          <td>{{workoutWeight[0]}}</td>
           <td><input type="number" v-model.number="reps[0]" placeholder="Reps"></td>
         </tr>
         <tr>
           <td>2</td>
-          <td>{{startWeight[1]}}</td>
+          <td>{{workoutWeight[1]}}</td>
           <td><input type="number" v-model.number="reps[1]" placeholder="Reps"></td>
         </tr>
         <tr>
           <td>3</td>
-          <td>{{startWeight[2]}}</td>
+          <td>{{workoutWeight[2]}}</td>
           <td><input type="number" v-model.number="reps[2]" placeholder="Reps"></td>
         </tr>
         <tr>
           <td>4</td>
-          <td>{{startWeight[3]}}</td>
+          <td>{{workoutWeight[3]}}</td>
           <td><input type="number" v-model.number="reps[3]"></td>
         </tr>
         <tr>
           <td>5</td>
-          <td>{{startWeight[4]}}</td>
+          <td>{{workoutWeight[4]}}</td>
           <td><input type="number" v-model.number="reps[4]" placeholder="Reps"></td>
         </tr>
       </table>
 
-      <button @click="saveItem" class="btn btn-primary">
+      <button @click="saveCompletedWorkout" class="btn btn-primary">
         End Workout
       </button>
     </div>
 
     <ul>
-      <li v-for="item in items" :key="item.id">
+      <li v-for="completedWorkout in completedWorkouts" :key="completedWorkout.id">
         <table>
           <tr>
             <th>Date:</th>
-            <th colspan="2">{{item.date}}</th>
+            <th colspan="2">{{completedWorkout.date}}</th>
           </tr>
           <tr>
             <th>workout nr:</th>
-            <th colspan="2">{{item.workoutNr}}</th>
+            <th colspan="2">{{completedWorkout.workoutNr}}</th>
           </tr>
           <tr>
             <th>Total:</th>
-            <th colspan="2">{{item.total}}</th>
+            <th colspan="2">{{completedWorkout.total}}</th>
           </tr>
           <tr>
             <th>Set</th>
@@ -110,28 +110,28 @@
           </tr>
           <tr>
             <td>1</td>
-            <td>{{item.startWeight[0]}}</td>
-            <td>{{item.reps[0]}}</td>
+            <td>{{completedWorkout.workoutWeight[0]}}</td>
+            <td>{{completedWorkout.reps[0]}}</td>
           </tr>
           <tr>
             <td>2</td>
-            <td>{{item.startWeight[1]}}</td>
-            <td>{{item.reps[1]}}</td>
+            <td>{{completedWorkout.workoutWeight[1]}}</td>
+            <td>{{completedWorkout.reps[1]}}</td>
           </tr>
           <tr>
             <td>3</td>
-            <td>{{item.startWeight[2]}}</td>
-            <td>{{item.reps[2]}}</td>
+            <td>{{completedWorkout.workoutWeight[2]}}</td>
+            <td>{{completedWorkout.reps[2]}}</td>
           </tr>
           <tr>
             <td>4</td>
-            <td>{{item.startWeight[3]}}</td>
-            <td>{{item.reps[3]}}</td>
+            <td>{{completedWorkout.workoutWeight[3]}}</td>
+            <td>{{completedWorkout.reps[3]}}</td>
           </tr>
           <tr>
             <td>5</td>
-            <td>{{item.startWeight[4]}}</td>
-            <td>{{item.reps[4]}}</td>
+            <td>{{completedWorkout.workoutWeight[4]}}</td>
+            <td>{{completedWorkout.reps[4]}}</td>
           </tr>
         </table>
       </li>
