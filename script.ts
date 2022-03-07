@@ -20,8 +20,6 @@ Vue.createApp({
             id: ""
         };
     },
-
-
     methods: {
         clearAll() {
             //clear all workouts from active page
@@ -31,7 +29,6 @@ Vue.createApp({
             window.localStorage.removeItem('total' + this.id)
             window.location.reload();
         },
-
         saveCompletedWorkout() {
             //add workout to list
             this.completedWorkouts.unshift({
@@ -62,8 +59,6 @@ Vue.createApp({
             window.localStorage.setItem('workoutNr' + this.id, JSON.stringify(this.workoutNr));
             window.localStorage.setItem('total' + this.id, JSON.stringify(this.total));
         },
-
-
         setStartingWeight() {
             //Fill empty array for first workout
             for (let i = 0; i < 5; i++) {
@@ -76,8 +71,6 @@ Vue.createApp({
             //hide "set starting weight" when it´s set
             this.toggle = !this.toggle;
         },
-
-
         setUnits() {
             //check local storage for data
             let check = JSON.parse(window.localStorage.getItem('completedWorkouts' + this.id));
@@ -97,12 +90,10 @@ Vue.createApp({
             }
             this.startWeight = 100;
         }
-
     },
     //get page id for local storage
     mounted() {
         this.id = this.$refs.id.innerHTML.slice(0, 5)
         this.setUnits()
     },
-
 }).mount('main');
