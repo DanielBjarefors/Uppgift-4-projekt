@@ -2,6 +2,7 @@
 //html layout
 //finishing CSS
 //better names for variables
+//remove induvidual workouts
 Vue.createApp({
     data: function () {
         return {

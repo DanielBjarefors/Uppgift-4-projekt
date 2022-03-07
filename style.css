@@ -5,6 +5,13 @@ body, #start, main, .form {
   flex-direction: column;  
    
 }
+main{
+  width: auto;
+}
+.canvasjs-chart-credit{
+  display: none;
+}
+
   
   ul {
     display: flex;

@@ -3,6 +3,7 @@ declare var Vue: any;
 //html layout
 //finishing CSS
 //better names for variables
+//remove induvidual workouts
 
 
 
@@ -94,6 +95,7 @@ Vue.createApp({
     //get page id for local storage
     mounted() {
         this.id = this.$refs.id.innerHTML.slice(0, 5)
-        this.setUnits()
+        this.setUnits()       
+        
     },
 }).mount('main');
