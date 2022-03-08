@@ -29,8 +29,8 @@ Vue.createApp({
         saveCompletedWorkout: function () {
             //add workout to list
             this.completedWorkouts.unshift({
-                workoutWeight: Object.assign({}, this.workoutWeight),
-                reps: Object.assign({}, this.reps),
+                workoutWeight: JSON.parse(JSON.stringify(this.workoutWeight)),
+                reps: JSON.parse(JSON.stringify(this.reps)),
                 date: JSON.parse(JSON.stringify(this.date)),
                 total: this.total,
                 workoutNr: this.workoutNr

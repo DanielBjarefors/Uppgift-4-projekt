@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SRP Home</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/vue@3" defer></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
@@ -28,14 +28,140 @@
         </header>
         </head>
 
-        <h1>Nothing here.</h1>
-        <h1 ref="id">Start page</h1>
+<label for=""></label> 
+<button @click="loadSampleDatat">Load sample workouts</button>      
+<h1 ref="id">Start page</h1>
 
 
-        <div id="chartContainer" style="height: 350px; width: 100%;"></div>
+        <div id="Bench" style="height: 350px; width: 100%;"></div>
+        <table>            
+            <tr>
+              <th colspan="2">Next Bench Workout</th>
+            </tr>
+            <tr>
+                <th>workout nr:</th>
+                <th>{{workoutNrB}}</th>
+              </tr>
+            <tr>
+              <th>Total:</th>
+              <th>{{totalB}}</th>
+            </tr>
+            <tr>
+              <th>Set</th>
+              <th>Weight</th>
+             </tr>
+            <tr>
+              <td>1</td>
+              <td>{{workoutWeightB[0]}}</td>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>{{workoutWeightB[1]}}</td>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>{{workoutWeightB[2]}}</td>
+              </td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>{{workoutWeightB[3]}}</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>{{workoutWeightB[4]}}</td>
+              </td>
+            </tr>
+          </table>
 
-        <div id="chartContainer2" style="height: 370px; width:100%;"></div>
+        <div id="Squat" style="height: 370px; width:100%;"></div>
+        <table>            
+            <tr>
+              <th colspan="2">Next Squat Workout</th>
+            </tr>
+            <tr>
+                <th>workout nr:</th>
+                <th>{{workoutNrS}}</th>
+              </tr>
+            <tr>
+              <th>Total:</th>
+              <th>{{totalS}}</th>
+            </tr>
+            <tr>
+              <th>Set</th>
+              <th>Weight</th>
+             </tr>
+            <tr>
+              <td>1</td>
+              <td>{{workoutWeightS[0]}}</td>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>{{workoutWeightS[1]}}</td>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>{{workoutWeightS[2]}}</td>
+              </td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>{{workoutWeightS[3]}}</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>{{workoutWeightS[4]}}</td>
+              </td>
+            </tr>
+          </table>
 
+
+        <div id="Deadl" style="height: 370px; width:100%;"></div>
+        <table>            
+            <tr>
+              <th colspan="2">Next Deadlift Workout</th>
+            </tr>
+            <tr>
+                <th>workout nr:</th>
+                <th>{{workoutNrD}}</th>
+              </tr>
+            <tr>
+              <th>Total:</th>
+              <th>{{totalD}}</th>
+            </tr>
+            <tr>
+              <th>Set</th>
+              <th>Weight</th>
+             </tr>
+            <tr>
+              <td>1</td>
+              <td>{{workoutWeightD[0]}}</td>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>{{workoutWeightD[1]}}</td>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>{{workoutWeightD[2]}}</td>
+              </td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>{{workoutWeightD[3]}}</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>{{workoutWeightD[4]}}</td>
+              </td>
+            </tr>
+          </table>
 
     </main>
 </body>

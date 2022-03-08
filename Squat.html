@@ -32,7 +32,7 @@
     <div class="hide" v-show='!toggle'>
       <h3>Set weight for 5x5.</h3>
 
-      <input type="number" v-model.number="startWeight" placeholder="Weight">
+      <input type="number" v-model.number="startWeight" >
       <button @click="setStartingWeight" class="btn btn-primary">
         Set starting weight
       </button>
@@ -59,17 +59,17 @@
         <tr>
           <td>1</td>
           <td>{{workoutWeight[0]}}</td>
-          <td><input type="number" v-model.number="reps[0]" placeholder="Reps"></td>
+          <td><input type="number" v-model.number="reps[0]" ></td>
         </tr>
         <tr>
           <td>2</td>
           <td>{{workoutWeight[1]}}</td>
-          <td><input type="number" v-model.number="reps[1]" placeholder="Reps"></td>
+          <td><input type="number" v-model.number="reps[1]" ></td>
         </tr>
         <tr>
           <td>3</td>
           <td>{{workoutWeight[2]}}</td>
-          <td><input type="number" v-model.number="reps[2]" placeholder="Reps"></td>
+          <td><input type="number" v-model.number="reps[2]" ></td>
         </tr>
         <tr>
           <td>4</td>
@@ -79,7 +79,7 @@
         <tr>
           <td>5</td>
           <td>{{workoutWeight[4]}}</td>
-          <td><input type="number" v-model.number="reps[4]" placeholder="Reps"></td>
+          <td><input type="number" v-model.number="reps[4]" ></td>
         </tr>
       </table>
 
