@@ -2,8 +2,6 @@ declare var Vue: any;
 //html layout
 //finishing CSS
 //remove induvidual workouts
-//10 workouts from json
-//canvas aspect-ratio??
 //tests
 
 
@@ -40,8 +38,8 @@ Vue.createApp({
                 total: this.total,
                 workoutNr: this.workoutNr
             }),
-            //increase nr for next workout
-            this.workoutNr++;
+                //increase nr for next workout
+                this.workoutNr++;
             //set weight for next workout
             for (let i = 0; i < this.workoutWeight.length; i++) {
                 this.reps[i] > 5 ? this.workoutWeight[i] += 5 : this.workoutWeight[i]
@@ -96,7 +94,7 @@ Vue.createApp({
     //get page id for local storage
     mounted() {
         this.id = this.$refs.id.innerHTML.slice(0, 5)
-        this.setUnits()       
-        
+        this.setUnits()
+
     },
-}).mount('main');
+}).mount('body');

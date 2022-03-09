@@ -1,8 +1,6 @@
 //html layout
 //finishing CSS
 //remove induvidual workouts
-//10 workouts from json
-//canvas aspect-ratio??
 //tests
 Vue.createApp({
     data: function () {
@@ -94,5 +92,5 @@ Vue.createApp({
         this.id = this.$refs.id.innerHTML.slice(0, 5);
         this.setUnits();
     }
-}).mount('main');
+}).mount('body');
 //# sourceMappingURL=script.js.map
