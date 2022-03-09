@@ -1,8 +1,9 @@
-//graph from API
 //html layout
 //finishing CSS
-//better names for variables
 //remove induvidual workouts
+//10 workouts from json
+//canvas aspect-ratio??
+//tests
 Vue.createApp({
     data: function () {
         return {
