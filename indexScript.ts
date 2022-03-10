@@ -28,33 +28,30 @@ Vue.createApp({
         };
     },
     methods: {
-        
+        //get sample workouts from json
         async loadSampleData() {
             window.localStorage.clear();
             let response = await fetch('data.json');
             let json = await response.json();
             Object.entries(json)
                 .forEach(([k, v]) => localStorage.setItem(k, v))
-            window.location.reload();
-            alert("hello")
-        },       
+            window.location.reload();            
+        }, 
+        //get data from local storage for pages by id      
         getData(id) {
             let name = "";
             let check = JSON.parse(window.localStorage.getItem('completedWorkouts' + id));
             if (check !== null) {
                 this.completedWorkouts = JSON.parse(window.localStorage.getItem('completedWorkouts' + id));
-
                 this.dataPoints = [];
                 for (let i = 0; i < this.completedWorkouts.length; i++) {
                     this.dataPoints.unshift({ y: this.completedWorkouts[i].total, x: this.completedWorkouts[i].workoutNr })
                 }
-
                 if (this.completedWorkouts.length > this.dataLength) {
                     for (let i = 0; i < this.completedWorkouts.length - this.dataLength; i++) {
                         this.dataPoints.shift();
                     }
                 }
-
                 switch (id) {
                     case "Bench":
                         name = "Bench Press Progress"
@@ -76,6 +73,7 @@ Vue.createApp({
                         break;
                 }
             }
+            //create charts with CanvasJS
             var chart = new CanvasJS.Chart(id, {
                 animationEnabled: true,
                 theme: "dark2",

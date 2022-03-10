@@ -34,7 +34,7 @@ a{
   background-size: cover;
   display: block;    
   border: 2px solid gray;
-  border-radius: 10%;
+  border-radius: 10px;
   justify-content: center;
   text-align: center;
   padding: 5px;
@@ -55,9 +55,16 @@ button{
   background-color: gray;
   padding: 10px;
   margin-bottom: 15px;
-  border-radius: 10%;
+  border-radius: 10px;
   cursor: pointer;
   color: whitesmoke;
+
+}
+.deleteThis{
+  border-radius: 50%;
+  font-size: 15px;
+  padding: 0;
+  margin: 0;
 }
 #filler{
   padding-bottom: 5px;
@@ -101,7 +108,7 @@ input{
   height: 30px;
   text-align: center;
   margin:10px; 
-  /* font-size: 18px; */
+  font-size: 18px;
   font-weight: 700;
   border-radius: 10%;
 }
@@ -109,7 +116,6 @@ footer{
   background-image: url("https://free4kwallpapers.com/uploads/originals/2015/09/02/grey-honeycomb-pattern.jpg");
   background-size: cover;
   text-align: center;
-  /* font-family: system-ui; */
   font-weight: 700;
   min-height: 50px;
   margin: 0;
@@ -117,7 +123,10 @@ footer{
 }
 @media (max-width:450px){
   html{
-      font-size: 13px;
+    font-size: 13px;
+  }
+  input{    
+    font-size: 13px;    
   }
 }
 

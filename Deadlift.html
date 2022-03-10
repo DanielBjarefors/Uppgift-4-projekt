@@ -94,11 +94,12 @@
     </div>
 
     <ul>
-      <li v-for="completedWorkout in completedWorkouts" :key="completedWorkout.id">
+      <li v-for="(completedWorkout, index) in completedWorkouts" :key="index">
         <table>
           <tr>
             <th>Date:</th>
-            <th colspan="2">{{completedWorkout.date}}</th>
+            <th >{{completedWorkout.date}}</th>
+            <th><button class="deleteThis" @click="deleteThis(index)">❌</button></th>
           </tr>
           <tr>
             <th>workout nr:</th>

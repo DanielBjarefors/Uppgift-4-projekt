@@ -56,6 +56,7 @@ Vue.createApp({
         };
     },
     methods: {
+        //get sample workouts from json
         loadSampleData: function () {
             return __awaiter(this, void 0, void 0, function () {
                 var response, json;
@@ -75,12 +76,12 @@ Vue.createApp({
                                 return localStorage.setItem(k, v);
                             });
                             window.location.reload();
-                            alert("hello");
                             return [2 /*return*/];
                     }
                 });
             });
         },
+        //get data from local storage for pages by id      
         getData: function (id) {
             var name = "";
             var check = JSON.parse(window.localStorage.getItem('completedWorkouts' + id));
@@ -116,6 +117,7 @@ Vue.createApp({
                         break;
                 }
             }
+            //create charts with CanvasJS
             var chart = new CanvasJS.Chart(id, {
                 animationEnabled: true,
                 theme: "dark2",
