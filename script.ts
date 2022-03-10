@@ -1,7 +1,4 @@
 declare var Vue: any;
-//tests
-
-
 
 Vue.createApp({
     data() {
@@ -28,14 +25,14 @@ Vue.createApp({
         },
         //reset next worout if last worout is deleted
         deleteThis(index) {
-            if (index===0) {
+            if (index === 0) {
                 this.workoutWeight = this.completedWorkouts[0].workoutWeight
             }
             //remove workout at index and renumber remaining
-            this.completedWorkouts.splice(index, 1);            
-                this.workoutNr= this.completedWorkouts.length+1;            
+            this.completedWorkouts.splice(index, 1);
+            this.workoutNr = this.completedWorkouts.length + 1;
             for (let i = 0; i < this.completedWorkouts.length; i++) {
-                this.completedWorkouts[i].workoutNr= this.completedWorkouts.length -i
+                this.completedWorkouts[i].workoutNr = this.completedWorkouts.length - i
             }
         },
         //add workout to list
@@ -69,7 +66,7 @@ Vue.createApp({
             window.localStorage.setItem('total' + this.id, JSON.stringify(this.total));
         },
         //Fill empty array for first workout
-        setStartingWeight() {            
+        setStartingWeight() {
             for (let i = 0; i < 5; i++) {
                 this.workoutWeight[i] = this.startWeight
             }
@@ -81,7 +78,7 @@ Vue.createApp({
             this.toggle = !this.toggle;
         },
         //check local storage for data
-        setUnits() {            
+        setUnits() {
             let check = JSON.parse(window.localStorage.getItem('completedWorkouts' + this.id));
             if (check !== null) {
                 this.completedWorkouts = JSON.parse(window.localStorage.getItem('completedWorkouts' + this.id));
@@ -104,6 +101,5 @@ Vue.createApp({
     mounted() {
         this.id = this.$refs.id.innerHTML.slice(0, 5)
         this.setUnits()
-
     },
 }).mount('body');

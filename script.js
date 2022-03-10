@@ -1,4 +1,3 @@
-//tests
 Vue.createApp({
     data: function () {
         return {

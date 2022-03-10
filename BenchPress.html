@@ -26,8 +26,6 @@
     <p id="filler" class="hide" v-show='!toggle'></p>
   </header>
   <main>
-    
-    
     <h2>Next Workout</h2>
     <div class="hide" v-show='!toggle'>
       <h3>Set weight for 5x5.</h3>
@@ -43,7 +41,7 @@
           <th colspan="2">{{date}}</th>
         </tr>
         <tr>
-          <th>workout nr:</th>
+          <th>Workout nr:</th>
           <th colspan="2">{{workoutNr}}</th>
         </tr>
         <tr>
@@ -85,17 +83,16 @@
         End Workout
       </button>
     </div>
-
     <ul>
       <li v-for="(completedWorkout, index) in completedWorkouts" :key="index">
         <table>
           <tr>
             <th>Date:</th>
-            <th >{{completedWorkout.date}}</th>
+            <th>{{completedWorkout.date}}</th>
             <th><button class="deleteThis" @click="deleteThis(index)">❌</button></th>
           </tr>
           <tr>
-            <th>workout nr:</th>
+            <th>Workout nr:</th>
             <th colspan="2">{{completedWorkout.workoutNr}}</th>
           </tr>
           <tr>
@@ -133,22 +130,13 @@
             <td>{{completedWorkout.reps[4]}}</td>
           </tr>
         </table>
-        
       </li>
     </ul>
     </div>
-
-
   </main>
   <footer>
-
-    <p>Created by: Daniel Bjärefors & Philip Nettelblad
-
-        Copyright © - 2022
-
-    </p>
-
-</footer>
+    <p>Created by: Daniel Bjärefors & Philip Nettelblad Copyright © - 2022</p>
+  </footer>
 </body>
 
 </html>
