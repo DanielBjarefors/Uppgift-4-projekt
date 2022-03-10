@@ -28,14 +28,16 @@ Vue.createApp({
         };
     },
     methods: {
-        async loadSampleDatat() {
+        
+        async loadSampleData() {
             window.localStorage.clear();
             let response = await fetch('data.json');
             let json = await response.json();
             Object.entries(json)
                 .forEach(([k, v]) => localStorage.setItem(k, v))
             window.location.reload();
-        },
+            alert("hello")
+        },       
         getData(id) {
             let name = "";
             let check = JSON.parse(window.localStorage.getItem('completedWorkouts' + id));
@@ -77,7 +79,7 @@ Vue.createApp({
             var chart = new CanvasJS.Chart(id, {
                 animationEnabled: true,
                 theme: "dark2",
-                backgroundColor: "grey",
+                backgroundColor: "",
                 title: {
                     text: name
                 },
@@ -106,4 +108,4 @@ Vue.createApp({
         this.getData("Deadl")
 
     },
-}).mount('main');
+}).mount('body');

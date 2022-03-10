@@ -68,9 +68,16 @@ body{
     font-family: system-ui;
 
   }
-  button{
+  #Bench, #Squat, #Deadl{
     background-image: url("https://free4kwallpapers.com/uploads/originals/2015/09/02/grey-honeycomb-pattern.jpg");
     background-size: cover;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%), 0 25px 50px 0 rgb(0 0 0 / 10%);
+    text-shadow: 1px 1px 5px black;
+border-radius: 4px;
+  }
+  button{
+    background-image: url("https://free4kwallpapers.com/uploads/originals/2015/09/02/grey-honeycomb-pattern.jpg");
+    background-size: auto;
     font-size: 18px;
     font-weight: 700;
     background-color: gray;
@@ -78,26 +85,23 @@ body{
     padding: 10px;
     margin-bottom: 15px;
     border-radius: 10%;
-    cursor: pointer;
-  
+    cursor: pointer;  
   }
   button:hover, a:hover{
     opacity:calc(0.6);
   }
-
   .canvasjs-chart-credit{
     display: none;
   }  
   table{
     color: white;
-    background-image: url("https://free4kwallpapers.com/uploads/originals/2015/09/02/grey-honeycomb-pattern.jpg");
+    background-image: linear-gradient(rgba(82, 81, 81, 0.35), rgba(67, 66, 66, 0.35)),url("https://free4kwallpapers.com/uploads/originals/2015/09/02/grey-honeycomb-pattern.jpg");
     background-size:auto;
     width: 20%;
     border-radius: 4px;
     text-align: center;  
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%), 0 25px 50px 0 rgb(0 0 0 / 10%);
-  }
-  
+  }  
   footer{
     background-image: url("https://free4kwallpapers.com/uploads/originals/2015/09/02/grey-honeycomb-pattern.jpg");
     background-size: cover;
@@ -106,7 +110,6 @@ body{
     font-family: system-ui;
     font-weight: 700;
     min-height: 50px;
-    /* margin: 0; */
     padding-top: 5px;
   }
 

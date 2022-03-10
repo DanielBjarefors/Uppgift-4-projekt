@@ -56,7 +56,7 @@ Vue.createApp({
         };
     },
     methods: {
-        loadSampleDatat: function () {
+        loadSampleData: function () {
             return __awaiter(this, void 0, void 0, function () {
                 var response, json;
                 return __generator(this, function (_a) {
@@ -75,6 +75,7 @@ Vue.createApp({
                                 return localStorage.setItem(k, v);
                             });
                             window.location.reload();
+                            alert("hello");
                             return [2 /*return*/];
                     }
                 });
@@ -118,7 +119,7 @@ Vue.createApp({
             var chart = new CanvasJS.Chart(id, {
                 animationEnabled: true,
                 theme: "dark2",
-                backgroundColor: "grey",
+                backgroundColor: "",
                 title: {
                     text: name
                 },
@@ -146,5 +147,5 @@ Vue.createApp({
         this.getData("Squat");
         this.getData("Deadl");
     }
-}).mount('main');
+}).mount('body');
 //# sourceMappingURL=indexScript.js.map
