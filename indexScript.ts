@@ -1,11 +1,5 @@
 declare var Vue: any;
 declare var CanvasJS: any;
-//graph from API
-//html layout
-//finishing CSS
-//remove induvidual workouts
-
-
 
 Vue.createApp({
     data() {
@@ -35,8 +29,8 @@ Vue.createApp({
             let json = await response.json();
             Object.entries(json)
                 .forEach(([k, v]) => localStorage.setItem(k, v))
-            window.location.reload();            
-        }, 
+            window.location.reload();
+        },
         //get data from local storage for pages by id      
         getData(id) {
             let name = "";
