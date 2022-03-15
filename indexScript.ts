@@ -34,6 +34,7 @@ Vue.createApp({
         //get data from local storage for pages by id      
         getData(id) {
             let name = "";
+            let renderCanvas = false;
             let check = JSON.parse(window.localStorage.getItem('completedWorkouts' + id));
             if (check !== null) {
                 this.completedWorkouts = JSON.parse(window.localStorage.getItem('completedWorkouts' + id));
@@ -46,52 +47,64 @@ Vue.createApp({
                         this.dataPoints.shift();
                     }
                 }
+
                 switch (id) {
                     case "Bench":
                         name = "Bench Press Progress"
                         this.workoutWeightB = JSON.parse(window.localStorage.getItem('workoutWeight' + id));
                         this.workoutNrB = JSON.parse(window.localStorage.getItem('workoutNr' + id));
                         this.totalB = JSON.parse(window.localStorage.getItem('total' + id));
+                        renderCanvas = true;
                         break;
                     case "Squat":
                         name = "Squat Progress"
                         this.workoutWeightS = JSON.parse(window.localStorage.getItem('workoutWeight' + id));
+                        this.workoutWeightS = JSON.parse(window.localStorage.getItem('workoutWeight' + id));
                         this.workoutNrS = JSON.parse(window.localStorage.getItem('workoutNr' + id));
                         this.totalS = JSON.parse(window.localStorage.getItem('total' + id));
+                        renderCanvas = true;
                         break;
                     case "Deadl":
                         name = "Deadlift Progress"
                         this.workoutWeightD = JSON.parse(window.localStorage.getItem('workoutWeight' + id));
                         this.workoutNrD = JSON.parse(window.localStorage.getItem('workoutNr' + id));
                         this.totalD = JSON.parse(window.localStorage.getItem('total' + id));
+                        renderCanvas = true;
                         break;
+                    default:
+                        return;
                 }
             }
-            //create charts with CanvasJS
-            var chart = new CanvasJS.Chart(id, {
-                animationEnabled: true,
-                theme: "dark2",
-                backgroundColor: "",
-                title: {
-                    text: name
-                },
-                axisX: {
-                    title: "Workout number",
-                    interval: 1
-                },
-                axisY: {
-                    title: "Total weight",
-                    interval: 10
-                },
-                data: [{
-                    type: "line",
-                    lineColor: "#00d2be",
-                    markerColor: "#00d2be",
-                    indexLabelFontSize: 16,
-                    dataPoints: this.dataPoints
-                }]
-            });
-            chart.render();
+            if (renderCanvas ===true) {
+                //create charts with CanvasJS
+                var chart = new CanvasJS.Chart(id, {
+                    animationEnabled: true,
+                    theme: "dark2",
+                    backgroundColor: "",
+                    title: {
+                        text: name
+                    },
+                    axisX: {
+                        title: "Workout number",
+                        interval: 1
+                    },
+                    axisY: {
+                        title: "Total weight",
+                        interval: 10
+                    },
+                    data: [{
+                        type: "line",
+                        lineColor: "#00d2be",
+                        markerColor: "#00d2be",
+                        indexLabelFontSize: 16,
+                        dataPoints: this.dataPoints
+                    }]
+                });
+                chart.render();
+                renderCanvas = false;
+
+            }
+
         }
     },
     mounted() {

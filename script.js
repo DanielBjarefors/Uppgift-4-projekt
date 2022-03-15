@@ -75,7 +75,7 @@ Vue.createApp({
             //hide "set starting weight" when it´s set
             this.toggle = !this.toggle;
         },
-        //check local storage for data
+        //check local storage for data and load 
         setUnits: function () {
             var check = JSON.parse(window.localStorage.getItem('completedWorkouts' + this.id));
             if (check !== null) {
@@ -84,7 +84,7 @@ Vue.createApp({
                 this.workoutNr = JSON.parse(window.localStorage.getItem('workoutNr' + this.id));
                 this.total = JSON.parse(window.localStorage.getItem('total' + this.id));
             }
-            //hide "set starting weight" if loading from starage
+            //hide "set starting weight" if loading from storage
             if (check !== null) {
                 this.toggle = true;
             }
