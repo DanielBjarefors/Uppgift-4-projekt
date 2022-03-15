@@ -1,13 +1,7 @@
 using System;
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
-using OpenQA.Selenium.Support.UI;
 
-//Lägg till en anteckning och bekräfta att den visas på sidan.
-//Lägg till en anteckning och bekräfta att sidan visar "1 item left". Kryssa sedan i anteckningen och bekräfta att sidan visar "0 items left".
-//Lägg till 3 anteckningar, kryssa i en av dem och bekräfta att sidan visar "2 items left".
 
 namespace SeleniumExample
 {
@@ -21,17 +15,13 @@ namespace SeleniumExample
         private const string index = "file:///C:/C%23/Frontend%20med%20Jakob%20Kallin/Uppgift-4-projekt/index.html";
 
         private EdgeDriver browser;
-
-
         // This is run before each test.
         [TestInitialize]
         public void EdgeDriverInitialize()
         {
             browser = new EdgeDriver(edgeDriverDirectory);
-            browser.Url = index;
+            browser.Url = benchPress;
         }
-       
-        
         [TestMethod]
         public void TestBenchAndIndexPage()
         {
@@ -42,7 +32,6 @@ namespace SeleniumExample
             var input = browser.FindElementsByCssSelector("input");
             var weight = browser.FindElementsByCssSelector("td");
 
-
             input[0].Clear();
             input[0].SendKeys("90");
             btn[1].Click();
@@ -52,7 +41,7 @@ namespace SeleniumExample
             btn[2].Click();
 
             Assert.AreEqual("95", weight[1].Text);
-            
+
             browser.Navigate().GoToUrl(index);
             var total = browser.FindElementsByCssSelector("th");
             Assert.IsTrue(total[4].Text == "455");
@@ -76,7 +65,6 @@ namespace SeleniumExample
             btn[2].Click();
 
             Assert.AreEqual("125", weight[1].Text);
-            //btn[0].Click();
         }
         [TestMethod]
         public void TestSquatPage()
@@ -99,9 +87,7 @@ namespace SeleniumExample
 
             Assert.AreEqual("125", weight[1].Text);
             Assert.AreEqual("125", weight[4].Text);
-            //btn[0].Click();
         }
-
         [TestCleanup]
         public void EdgeDriverCleanup()
         {
