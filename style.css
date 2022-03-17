@@ -102,6 +102,14 @@
  li {
    margin-right: 20px;
  }
+ 
+.canvas {
+  background-image: linear-gradient(rgba(85, 85, 85, 0.433), rgba(70, 70, 70, 0.638)), url("https://free4kwallpapers.com/uploads/originals/2015/09/02/grey-honeycomb-pattern.jpg");
+  background-size: auto;
+  border: 2px solid gray;
+   /* border-radius: 10px; */
+}
+
 
  table {
    color: white;

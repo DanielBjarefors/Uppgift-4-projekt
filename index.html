@@ -10,7 +10,6 @@
         href="https://www.freeiconspng.com/uploads/--equipment-sport-tool-weightlifting-icon--icon-search-engine-23.png" />
     <link rel="stylesheet" href="indexStyle.css">
     <script src="https://unpkg.com/vue@3" defer></script>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script src="indexScript.js" defer></script>
 </head>
 
@@ -31,7 +30,7 @@
     </head>
     <main>
         <div class="col">
-            <div id="Bench" style="height: 300px; width: 60%;"></div>
+            <canvas class="canvas" ref="Bench" ></canvas>
             <table>
                 <tr>
                     <th colspan="2">Next Bench Workout</th>
@@ -75,7 +74,7 @@
             </table>
         </div>
         <div class="col">
-            <div id="Squat" style="height: 300px; width: 60%;"></div>
+            <canvas class="canvas" ref="Squat" ></canvas>
             <table>
                 <tr>
                     <th colspan="2">Next Squat Workout</th>
@@ -115,7 +114,7 @@
             </table>
         </div>
         <div class="col">
-            <div id="Deadl" style="height: 300px; width:60%;"></div>
+            <canvas class="canvas" ref="Deadl" ></canvas>
             <table>
                 <tr>
                     <th colspan="2">Next Deadlift Workout</th>
@@ -153,7 +152,7 @@
                     <td>{{workoutWeightD[4]}}</td>                    
                 </tr>
             </table>
-        </div>
+        </div>       
     </main>
     <footer>
         <p>Created by: Daniel Bjärefors & Philip Nettelblad Copyright © - 2022</p>

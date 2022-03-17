@@ -80,7 +80,6 @@ Vue.createApp({
         //get data from local storage for pages by id      
         getData: function (id) {
             var name = "";
-            var renderCanvas = false;
             var check = JSON.parse(window.localStorage.getItem('completedWorkouts' + id));
             if (check !== null) {
                 this.completedWorkouts = JSON.parse(window.localStorage.getItem('completedWorkouts' + id));
@@ -93,13 +92,18 @@ Vue.createApp({
                         this.dataPoints.shift();
                     }
                 }
+                if (this.dataPoints[0].x > 1) {
+                    for (var i = 0; i < this.dataPoints.length; i++) {
+                        this.dataPoints[i].x = i + 1;
+                    }
+                }
                 switch (id) {
                     case "Bench":
                         name = "Bench Press Progress";
                         this.workoutWeightB = JSON.parse(window.localStorage.getItem('workoutWeight' + id));
                         this.workoutNrB = JSON.parse(window.localStorage.getItem('workoutNr' + id));
                         this.totalB = JSON.parse(window.localStorage.getItem('total' + id));
-                        renderCanvas = true;
+                        this.loadCanvasData(this.dataPoints, this.canvasBench);
                         break;
                     case "Squat":
                         name = "Squat Progress";
@@ -107,50 +111,50 @@ Vue.createApp({
                         this.workoutWeightS = JSON.parse(window.localStorage.getItem('workoutWeight' + id));
                         this.workoutNrS = JSON.parse(window.localStorage.getItem('workoutNr' + id));
                         this.totalS = JSON.parse(window.localStorage.getItem('total' + id));
-                        renderCanvas = true;
+                        this.loadCanvasData(this.dataPoints, this.canvasSquat);
                         break;
                     case "Deadl":
                         name = "Deadlift Progress";
                         this.workoutWeightD = JSON.parse(window.localStorage.getItem('workoutWeight' + id));
                         this.workoutNrD = JSON.parse(window.localStorage.getItem('workoutNr' + id));
                         this.totalD = JSON.parse(window.localStorage.getItem('total' + id));
-                        renderCanvas = true;
+                        this.loadCanvasData(this.dataPoints, this.canvasDeadl);
                         break;
-                    default:
-                        return;
                 }
             }
-            if (renderCanvas === true) {
-                //create charts with CanvasJS
-                var chart = new CanvasJS.Chart(id, {
-                    animationEnabled: true,
-                    theme: "dark2",
-                    backgroundColor: "",
-                    title: {
-                        text: name
-                    },
-                    axisX: {
-                        title: "Workout number",
-                        interval: 1
-                    },
-                    axisY: {
-                        title: "Total weight",
-                        interval: 10
-                    },
-                    data: [{
-                            type: "line",
-                            lineColor: "#00d2be",
-                            markerColor: "#00d2be",
-                            indexLabelFontSize: 16,
-                            dataPoints: this.dataPoints
-                        }]
-                });
-                chart.render();
-                renderCanvas = false;
+        },
+        loadCanvasData: function (dataArray, canvas) {
+            var previousX = 15;
+            var previousY = 0;
+            for (var i = 1; i < dataArray.length; i++) {
+                this.drawLine(canvas, previousX, previousY, dataArray[i].x * 15, dataArray[i].y - dataArray[i - 1].y + previousY);
+                previousX = dataArray[i].x * 15;
+                previousY = dataArray[i].y - dataArray[i - 1].y + previousY;
             }
+        },
+        drawLine: function (c, x1, y1, x2, y2) {
+            c.beginPath();
+            c.strokeStyle = 'whitesmoke';
+            c.lineWidth = 1;
+            c.moveTo(x1, y1);
+            c.lineTo(x2, y2);
+            c.stroke();
+            c.closePath();
+            c.fillStyle = 'whitesmoke';
+            c.fillRect(x2 - 2, y2, 5, 1);
+            c.fillRect(x2, y2 - 2, 1, 5);
+            // c.setLineDash([5,10,15])
+            // c.fillText("hello baby")
         }
     },
     mounted: function () {
+        this.canvasBench = this.$refs.Bench.getContext('2d');
+        this.canvasBench.transform(1, 0, 0, -1, 10, 140);
+        this.canvasSquat = this.$refs.Squat.getContext('2d');
+        this.canvasSquat.transform(1, 0, 0, -1, 10, 140);
+        this.canvasDeadl = this.$refs.Deadl.getContext('2d');
+        this.canvasDeadl.transform(1, 0, 0, -1, 10, 140);
+        // this.canvas.scale(0.65,0.99);
         this.getData("Bench");
         this.getData("Squat");
         this.getData("Deadl");

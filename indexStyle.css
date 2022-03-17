@@ -96,9 +96,18 @@ button:hover, a:hover {
     opacity: calc(0.6);
 }
 
-.canvasjs-chart-credit {
-    display: none;
+
+.canvas {
+    color: white;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%), 0 25px 50px 0 rgb(0 0 0 / 10%);
+    background-image: linear-gradient(rgba(107, 107, 107, 0.337), rgba(75, 75, 75, 0.316)), url("https://free4kwallpapers.com/uploads/originals/2015/09/02/grey-honeycomb-pattern.jpg");
+    background-size: auto;
+    border-radius: 5px;
+    height: 300px; 
+    width: 60%;
 }
+
+
 
 table {
     color: white;
