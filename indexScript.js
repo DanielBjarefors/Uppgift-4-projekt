@@ -100,6 +100,7 @@ Vue.createApp({
                 switch (id) {
                     case "Bench":
                         name = "Bench Press Progress";
+                        // this.canvasBench.scale(0,75.75);
                         this.workoutWeightB = JSON.parse(window.localStorage.getItem('workoutWeight' + id));
                         this.workoutNrB = JSON.parse(window.localStorage.getItem('workoutNr' + id));
                         this.totalB = JSON.parse(window.localStorage.getItem('total' + id));
@@ -124,15 +125,33 @@ Vue.createApp({
             }
         },
         loadCanvasData: function (dataArray, canvas) {
-            var previousX = 15;
+            var previousX = 30;
             var previousY = 0;
+            this.drawTicks(canvas);
             for (var i = 1; i < dataArray.length; i++) {
-                this.drawLine(canvas, previousX, previousY, dataArray[i].x * 15, dataArray[i].y - dataArray[i - 1].y + previousY);
-                previousX = dataArray[i].x * 15;
+                this.drawLine(i, canvas, previousX, previousY, dataArray[i].x * 27, dataArray[i].y - dataArray[i - 1].y + previousY);
+                previousX = dataArray[i].x * 27;
                 previousY = dataArray[i].y - dataArray[i - 1].y + previousY;
+                // if previousY is bigger than graph height scale down y    
             }
         },
-        drawLine: function (c, x1, y1, x2, y2) {
+        drawTicks: function (c) {
+            for (var y = 0; y < 400; y += 10) {
+                c.fillStyle = 'whitesmoke';
+                c.fillRect(0, y, 3, 1);
+                c.save();
+                c.transform(1, 0, 0, -1, 0, 140);
+                // c.translate(0,1);
+                c.fillText("hello", 5, 140 - y);
+                c.restore();
+            }
+        },
+        drawLine: function (i, c, x1, y1, x2, y2) {
+            if (i === 1) {
+                c.fillStyle = 'whitesmoke';
+                c.fillRect(x1 - 2, y1, 5, 1);
+                c.fillRect(x1, y1 - 2, 1, 5);
+            }
             c.beginPath();
             c.strokeStyle = 'whitesmoke';
             c.lineWidth = 1;
@@ -143,17 +162,20 @@ Vue.createApp({
             c.fillStyle = 'whitesmoke';
             c.fillRect(x2 - 2, y2, 5, 1);
             c.fillRect(x2, y2 - 2, 1, 5);
-            // c.setLineDash([5,10,15])
-            // c.fillText("hello baby")
+            c.save();
+            c.transform(1, 0, 0, -1, 0, 140);
+            c.fillText("hello", x2 - 30, 140 - y2 - 3);
+            c.restore();
         }
     },
     mounted: function () {
+        //use transform (-1) to change height
         this.canvasBench = this.$refs.Bench.getContext('2d');
-        this.canvasBench.transform(1, 0, 0, -1, 10, 140);
+        this.canvasBench.transform(1, 0, 0, -1, 0, 140);
         this.canvasSquat = this.$refs.Squat.getContext('2d');
-        this.canvasSquat.transform(1, 0, 0, -1, 10, 140);
+        this.canvasSquat.transform(1, 0, 0, -1, 0, 140);
         this.canvasDeadl = this.$refs.Deadl.getContext('2d');
-        this.canvasDeadl.transform(1, 0, 0, -1, 10, 140);
+        this.canvasDeadl.transform(1, 0, 0, -1, 0, 140);
         // this.canvas.scale(0.65,0.99);
         this.getData("Bench");
         this.getData("Squat");
