@@ -49,12 +49,12 @@ Vue.createApp({
                         this.dataPoints.shift();
                     }
                 }
-                if (this.dataPoints[0].x > 1) {
-                    for (let i = 0; i < this.dataPoints.length; i++) {
-                        this.dataPoints[i].x = i + 1
-                    }
+                // if (this.dataPoints[0].x > 1) {
+                //     for (let i = 0; i < this.dataPoints.length; i++) {
+                //         this.dataPoints[i].x = i + 1
+                //     }
 
-                }
+                // }
 
                 switch (id) {
                     case "Bench":
@@ -64,7 +64,7 @@ Vue.createApp({
                         this.workoutNrB = JSON.parse(window.localStorage.getItem('workoutNr' + id));
                         this.totalB = JSON.parse(window.localStorage.getItem('total' + id));
                         this.loadCanvasData(this.dataPoints, this.canvasBench);
-                        
+
 
                         break;
                     case "Squat":
@@ -89,64 +89,52 @@ Vue.createApp({
 
         },
 
-        loadCanvasData(dataArray, canvas) {
-            let previousX = 30;
+        loadCanvasData(dataPoints, canvas) {
+            let previousX = 27;
             let previousY = 0;
 
             this.drawTicks(canvas);
 
-            for (let i = 1; i < dataArray.length; i++) {
+            for (let i = 1; i < dataPoints.length; i++) {
 
                 this.drawLine(
+                    dataPoints,
                     i,
                     canvas,
                     previousX,
                     previousY,
-                    dataArray[i].x * 27,
-                    dataArray[i].y - dataArray[i - 1].y + previousY
+                    previousX + 27,
+                    dataPoints[i].y - dataPoints[i - 1].y + previousY
                 );
-                previousX = dataArray[i].x * 27;
-                previousY = dataArray[i].y - dataArray[i - 1].y + previousY;
+                previousX += 27;
+                previousY = dataPoints[i].y - dataPoints[i - 1].y + previousY;
 
                 // if previousY is bigger than graph height scale down y    
 
-                
             }
-
-
-
         },
 
-        drawTicks(c){
+        drawTicks(c) {
 
-            for (let y = 0; y < 400; y+=10) {
+            for (let xy = 0; xy < 400; xy += 10) {
 
                 c.fillStyle = 'whitesmoke';
-                c.fillRect(0, y, 3, 1);
-                c.save();
-                c.transform(1, 0, 0, -1, 0, 140);
-
-                // c.translate(0,1);
-                c.fillText("hello", 5, 140-y)
-                
-                c.restore();
-
+                c.fillRect(0, xy, 3, 1);                
             }
-            
-
         },
 
-        drawLine(i, c, x1, y1, x2, y2) {
-
-
-
-
-
+        drawLine(dataPoints, i, c, x1, y1, x2, y2) {
+            let font = "8px LCD"
             if (i === 1) {
                 c.fillStyle = 'whitesmoke';
-                c.fillRect(x1 - 2, y1, 5, 1);
+                c.fillRect(x1 - 20, y1, 23, 1);
                 c.fillRect(x1, y1 - 2, 1, 5);
-                
+                c.save();
+                c.transform(1, 0, 0, -1, 0, 140);
+                c.font = font
+                c.fillText(dataPoints[i - 1].y, x1 - 10, 140 - y1 - 3)
+                c.fillText(dataPoints[i-1].x, x1 , 150 )
+                c.restore();
             }
             c.beginPath();
             c.strokeStyle = 'whitesmoke';
@@ -156,27 +144,47 @@ Vue.createApp({
             c.stroke();
             c.closePath();
             c.fillStyle = 'whitesmoke';
-            c.fillRect(x2 - 2, y2, 5, 1);
+            c.fillRect(x2 - 20, y2, 23, 1);
             c.fillRect(x2, y2 - 2, 1, 5);
-
+            c.fillRect(x2, -2, 1, 5);
             c.save();
             c.transform(1, 0, 0, -1, 0, 140);
-            c.fillText("hello", x2-30, 140-y2-3)            
+            c.font = font
+            c.fillText(dataPoints[i].y, x2 - 10, 140 - y2 - 3)
+            c.fillText(dataPoints[i].x, x2 , 150 )
             c.restore();
+        },
+        setCanvasScale(canvas, htmlCanvas,e) {
+
+
+            var size = 200;
+        canvas.width = size;
+        canvas.height = size;
+        var scale = window.devicePixelRatio + 1; // Change to 1 on retina screens to see blurry htmlCanvas[0].
+        htmlCanvas[e].width = Math.floor((size + 90) * scale);
+        htmlCanvas[e].height = Math.floor((size - 45) * scale);
+        canvas.scale(scale, scale);
+        canvas.textAlign = 'center';
+        canvas.transform(1, 0, 0, -1, 0, 140);
+
+
         }
 
     },
     mounted() {
 
         //use transform (-1) to change height
-
+        this.htmlCanvas = document.querySelectorAll("canvas");
+        
         this.canvasBench = this.$refs.Bench.getContext('2d');
-        this.canvasBench.transform(1, 0, 0, -1, 0, 140);
+        this.setCanvasScale(this.canvasBench, this.htmlCanvas,0)
+
         this.canvasSquat = this.$refs.Squat.getContext('2d');
-        this.canvasSquat.transform(1, 0, 0, -1, 0, 140);
+        this.setCanvasScale(this.canvasSquat, this.htmlCanvas,1)
+
         this.canvasDeadl = this.$refs.Deadl.getContext('2d');
-        this.canvasDeadl.transform(1, 0, 0, -1, 0, 140);
-        // this.canvas.scale(0.65,0.99);
+        this.setCanvasScale(this.canvasDeadl, this.htmlCanvas,2)
+
         this.getData("Bench");
         this.getData("Squat")
         this.getData("Deadl")
