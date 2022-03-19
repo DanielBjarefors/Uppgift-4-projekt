@@ -144,7 +144,6 @@ Vue.createApp({
         drawLine: function (dataPoints, i, c, x1, y1, x2, y2) {
             var font = "8px LCD";
             var diff = dataPoints[dataPoints.length - 1].y - dataPoints[0].y;
-            // change height, 225kg 0.5 ,200kg 0.57,175kg 0.66,150kg 0.77,125kg 0.9, 100kg 1.13, 75kg 1.5 ,50kg 2.2
             if (diff > 175) {
                 y1 *= 0.5;
                 y2 *= 0.5;
@@ -198,7 +197,7 @@ Vue.createApp({
             var size = 200;
             canvas.width = size;
             canvas.height = size;
-            var scale = window.devicePixelRatio + 1;
+            var scale = window.devicePixelRatio + 2;
             htmlCanvas[e].width = Math.floor((size + 90) * scale);
             htmlCanvas[e].height = Math.floor((size - 45) * scale);
             canvas.scale(scale, scale);

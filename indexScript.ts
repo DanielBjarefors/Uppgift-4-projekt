@@ -64,8 +64,6 @@ Vue.createApp({
                         this.workoutNrB = JSON.parse(window.localStorage.getItem('workoutNr' + id));
                         this.totalB = JSON.parse(window.localStorage.getItem('total' + id));
                         this.loadCanvasData(this.dataPoints, this.canvasBench);
-
-
                         break;
                     case "Squat":
                         name = "Squat Progress"
@@ -74,7 +72,6 @@ Vue.createApp({
                         this.workoutNrS = JSON.parse(window.localStorage.getItem('workoutNr' + id));
                         this.totalS = JSON.parse(window.localStorage.getItem('total' + id));
                         this.loadCanvasData(this.dataPoints, this.canvasSquat);
-
                         break;
                     case "Deadl":
                         name = "Deadlift Progress"
@@ -82,7 +79,6 @@ Vue.createApp({
                         this.workoutNrD = JSON.parse(window.localStorage.getItem('workoutNr' + id));
                         this.totalD = JSON.parse(window.localStorage.getItem('total' + id));
                         this.loadCanvasData(this.dataPoints, this.canvasDeadl);
-
                         break;
                 }
             }
@@ -126,9 +122,7 @@ Vue.createApp({
         drawLine(dataPoints, i, c, x1, y1, x2, y2) {
             let font = "8px LCD"
             let diff = dataPoints[dataPoints.length-1].y-dataPoints[0].y;
-            // change height, 225kg 0.5 ,200kg 0.57,175kg 0.66,150kg 0.77,125kg 0.9, 100kg 1.13, 75kg 1.5 ,50kg 2.2
-
-
+            
             if (diff>175) {
                 y1 *= 0.5
                 y2 *= 0.5
@@ -149,8 +143,6 @@ Vue.createApp({
                 y1 *= 1.5
                 y2 *= 1.5
             }
-            
-
 
             if (i === 1) {
                 c.fillStyle = 'whitesmoke';
@@ -182,25 +174,18 @@ Vue.createApp({
             c.restore();
         },
         setCanvasScale(canvas, htmlCanvas, e) {
-
-
             var size = 200;
             canvas.width = size;
             canvas.height = size;
-            var scale = window.devicePixelRatio + 1;
+            var scale = window.devicePixelRatio + 2;
             htmlCanvas[e].width = Math.floor((size + 90) * scale);
             htmlCanvas[e].height = Math.floor((size - 45) * scale);
             canvas.scale(scale, scale);
             canvas.textAlign = 'center';
             canvas.transform(1, 0, 0, -1, 0, 140);
-
-
         }
-
     },
     mounted() {
-
-
         this.htmlCanvas = document.querySelectorAll("canvas");
 
         this.canvasBench = this.$refs.Bench.getContext('2d');
@@ -215,6 +200,5 @@ Vue.createApp({
         this.getData("Bench");
         this.getData("Squat")
         this.getData("Deadl")
-
     },
 }).mount('body');
