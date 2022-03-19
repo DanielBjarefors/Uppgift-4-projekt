@@ -56,8 +56,10 @@ main {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    padding-top: 20px;
     justify-content: space-around;
+}
+canvas,table{
+    margin-top: 20px;
 }
 
 body {
@@ -103,8 +105,8 @@ canvas {
     background-image: linear-gradient(rgba(107, 107, 107, 0.337), rgba(75, 75, 75, 0.316)), url("https://free4kwallpapers.com/uploads/originals/2015/09/02/grey-honeycomb-pattern.jpg");
     background-size: auto;
     border-radius: 5px;
-    /* height: 300px; 
-    width: 60%; */
+    /* height: 300px;  */
+    width: 70%;
     /* image-rendering: pixelated */
 }
 

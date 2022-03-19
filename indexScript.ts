@@ -93,7 +93,7 @@ Vue.createApp({
             let previousX = 27;
             let previousY = 0;
 
-            this.drawTicks(canvas);
+            // this.drawTicks(canvas);
 
             for (let i = 1; i < dataPoints.length; i++) {
 
@@ -114,17 +114,44 @@ Vue.createApp({
             }
         },
 
-        drawTicks(c) {
+        // drawTicks(c) {
 
-            for (let xy = 0; xy < 400; xy += 10) {
+        //     for (let xy = 0; xy < 400; xy += 10) {
 
-                c.fillStyle = 'whitesmoke';
-                c.fillRect(0, xy, 3, 1);                
-            }
-        },
+        //         c.fillStyle = 'whitesmoke';
+        //         c.fillRect(0, xy, 3, 1);
+        //     }
+        // },
 
         drawLine(dataPoints, i, c, x1, y1, x2, y2) {
             let font = "8px LCD"
+            let diff = dataPoints[dataPoints.length-1].y-dataPoints[0].y;
+            // change height, 225kg 0.5 ,200kg 0.57,175kg 0.66,150kg 0.77,125kg 0.9, 100kg 1.13, 75kg 1.5 ,50kg 2.2
+
+
+            if (diff>175) {
+                y1 *= 0.5
+                y2 *= 0.5
+            }
+            else if (diff>=145) {
+                y1 *= 0.75
+                y2 *= 0.75
+            }
+            else if (diff>=120) {
+                y1 *= 0.9
+                y2 *= 0.9
+            }
+            else if (diff>=90) {
+                y1 *= 1.1
+                y2 *= 1.1
+            }
+            else{
+                y1 *= 1.5
+                y2 *= 1.5
+            }
+            
+
+
             if (i === 1) {
                 c.fillStyle = 'whitesmoke';
                 c.fillRect(x1 - 20, y1, 23, 1);
@@ -133,7 +160,7 @@ Vue.createApp({
                 c.transform(1, 0, 0, -1, 0, 140);
                 c.font = font
                 c.fillText(dataPoints[i - 1].y, x1 - 10, 140 - y1 - 3)
-                c.fillText(dataPoints[i-1].x, x1 , 150 )
+                c.fillText(dataPoints[i - 1].x, x1, 150)
                 c.restore();
             }
             c.beginPath();
@@ -151,21 +178,21 @@ Vue.createApp({
             c.transform(1, 0, 0, -1, 0, 140);
             c.font = font
             c.fillText(dataPoints[i].y, x2 - 10, 140 - y2 - 3)
-            c.fillText(dataPoints[i].x, x2 , 150 )
+            c.fillText(dataPoints[i].x, x2, 150)
             c.restore();
         },
-        setCanvasScale(canvas, htmlCanvas,e) {
+        setCanvasScale(canvas, htmlCanvas, e) {
 
 
             var size = 200;
-        canvas.width = size;
-        canvas.height = size;
-        var scale = window.devicePixelRatio + 1; // Change to 1 on retina screens to see blurry htmlCanvas[0].
-        htmlCanvas[e].width = Math.floor((size + 90) * scale);
-        htmlCanvas[e].height = Math.floor((size - 45) * scale);
-        canvas.scale(scale, scale);
-        canvas.textAlign = 'center';
-        canvas.transform(1, 0, 0, -1, 0, 140);
+            canvas.width = size;
+            canvas.height = size;
+            var scale = window.devicePixelRatio + 1;
+            htmlCanvas[e].width = Math.floor((size + 90) * scale);
+            htmlCanvas[e].height = Math.floor((size - 45) * scale);
+            canvas.scale(scale, scale);
+            canvas.textAlign = 'center';
+            canvas.transform(1, 0, 0, -1, 0, 140);
 
 
         }
@@ -173,17 +200,17 @@ Vue.createApp({
     },
     mounted() {
 
-        //use transform (-1) to change height
+
         this.htmlCanvas = document.querySelectorAll("canvas");
-        
+
         this.canvasBench = this.$refs.Bench.getContext('2d');
-        this.setCanvasScale(this.canvasBench, this.htmlCanvas,0)
+        this.setCanvasScale(this.canvasBench, this.htmlCanvas, 0)
 
         this.canvasSquat = this.$refs.Squat.getContext('2d');
-        this.setCanvasScale(this.canvasSquat, this.htmlCanvas,1)
+        this.setCanvasScale(this.canvasSquat, this.htmlCanvas, 1)
 
         this.canvasDeadl = this.$refs.Deadl.getContext('2d');
-        this.setCanvasScale(this.canvasDeadl, this.htmlCanvas,2)
+        this.setCanvasScale(this.canvasDeadl, this.htmlCanvas, 2)
 
         this.getData("Bench");
         this.getData("Squat")

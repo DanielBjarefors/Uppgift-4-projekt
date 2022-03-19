@@ -127,7 +127,7 @@ Vue.createApp({
         loadCanvasData: function (dataPoints, canvas) {
             var previousX = 27;
             var previousY = 0;
-            this.drawTicks(canvas);
+            // this.drawTicks(canvas);
             for (var i = 1; i < dataPoints.length; i++) {
                 this.drawLine(dataPoints, i, canvas, previousX, previousY, previousX + 27, dataPoints[i].y - dataPoints[i - 1].y + previousY);
                 previousX += 27;
@@ -135,14 +135,36 @@ Vue.createApp({
                 // if previousY is bigger than graph height scale down y    
             }
         },
-        drawTicks: function (c) {
-            for (var xy = 0; xy < 400; xy += 10) {
-                c.fillStyle = 'whitesmoke';
-                c.fillRect(0, xy, 3, 1);
-            }
-        },
+        // drawTicks(c) {
+        //     for (let xy = 0; xy < 400; xy += 10) {
+        //         c.fillStyle = 'whitesmoke';
+        //         c.fillRect(0, xy, 3, 1);
+        //     }
+        // },
         drawLine: function (dataPoints, i, c, x1, y1, x2, y2) {
             var font = "8px LCD";
+            var diff = dataPoints[dataPoints.length - 1].y - dataPoints[0].y;
+            // change height, 225kg 0.5 ,200kg 0.57,175kg 0.66,150kg 0.77,125kg 0.9, 100kg 1.13, 75kg 1.5 ,50kg 2.2
+            if (diff > 175) {
+                y1 *= 0.5;
+                y2 *= 0.5;
+            }
+            else if (diff >= 145) {
+                y1 *= 0.75;
+                y2 *= 0.75;
+            }
+            else if (diff >= 120) {
+                y1 *= 0.9;
+                y2 *= 0.9;
+            }
+            else if (diff >= 90) {
+                y1 *= 1.1;
+                y2 *= 1.1;
+            }
+            else {
+                y1 *= 1.5;
+                y2 *= 1.5;
+            }
             if (i === 1) {
                 c.fillStyle = 'whitesmoke';
                 c.fillRect(x1 - 20, y1, 23, 1);
@@ -176,7 +198,7 @@ Vue.createApp({
             var size = 200;
             canvas.width = size;
             canvas.height = size;
-            var scale = window.devicePixelRatio + 1; // Change to 1 on retina screens to see blurry htmlCanvas[0].
+            var scale = window.devicePixelRatio + 1;
             htmlCanvas[e].width = Math.floor((size + 90) * scale);
             htmlCanvas[e].height = Math.floor((size - 45) * scale);
             canvas.scale(scale, scale);
@@ -185,7 +207,6 @@ Vue.createApp({
         }
     },
     mounted: function () {
-        //use transform (-1) to change height
         this.htmlCanvas = document.querySelectorAll("canvas");
         this.canvasBench = this.$refs.Bench.getContext('2d');
         this.setCanvasScale(this.canvasBench, this.htmlCanvas, 0);

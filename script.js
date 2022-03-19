@@ -32,6 +32,14 @@ Vue.createApp({
             for (var i = 0; i < this.completedWorkouts.length; i++) {
                 this.completedWorkouts[i].workoutNr = this.completedWorkouts.length - i;
             }
+            this.total = 0;
+            for (var i = 0; i < this.workoutWeight.length; i++) {
+                this.total += this.workoutWeight[i];
+            }
+            window.localStorage.setItem('completedWorkouts' + this.id, JSON.stringify(this.completedWorkouts));
+            window.localStorage.setItem('workoutWeight' + this.id, JSON.stringify(this.workoutWeight));
+            window.localStorage.setItem('workoutNr' + this.id, JSON.stringify(this.workoutNr));
+            window.localStorage.setItem('total' + this.id, JSON.stringify(this.total));
         },
         //add workout to list
         saveCompletedWorkout: function () {
