@@ -38,8 +38,6 @@ Vue.createApp({
     data: function () {
         return {
             completedWorkouts: [],
-            dataPoints: [],
-            dataLength: 10,
             workoutWeightB: [],
             workoutWeightS: [],
             workoutWeightD: [],
@@ -80,27 +78,21 @@ Vue.createApp({
         //get data from local storage for pages by id      
         getData: function (id) {
             var name = "";
+            var dataLength = 10;
+            this.dataPoints = [];
             var check = JSON.parse(window.localStorage.getItem('completedWorkouts' + id));
             if (check !== null) {
                 this.completedWorkouts = JSON.parse(window.localStorage.getItem('completedWorkouts' + id));
-                this.dataPoints = [];
                 for (var i = 0; i < this.completedWorkouts.length; i++) {
                     this.dataPoints.unshift({ y: this.completedWorkouts[i].total, x: this.completedWorkouts[i].workoutNr });
                 }
-                if (this.completedWorkouts.length > this.dataLength) {
-                    for (var i = 0; i < this.completedWorkouts.length - this.dataLength; i++) {
-                        this.dataPoints.shift();
-                    }
+                if (this.completedWorkouts.length > dataLength) {
+                    var diff = this.completedWorkouts.length - dataLength;
+                    this.dataPoints.splice(0, diff);
                 }
-                // if (this.dataPoints[0].x > 1) {
-                //     for (let i = 0; i < this.dataPoints.length; i++) {
-                //         this.dataPoints[i].x = i + 1
-                //     }
-                // }
                 switch (id) {
                     case "Bench":
                         name = "Bench Press Progress";
-                        // this.canvasBench.scale(0,75.75);
                         this.workoutWeightB = JSON.parse(window.localStorage.getItem('workoutWeight' + id));
                         this.workoutNrB = JSON.parse(window.localStorage.getItem('workoutNr' + id));
                         this.totalB = JSON.parse(window.localStorage.getItem('total' + id));
@@ -127,43 +119,31 @@ Vue.createApp({
         loadCanvasData: function (dataPoints, canvas) {
             var previousX = 27;
             var previousY = 0;
-            // this.drawTicks(canvas);
-            for (var i = 1; i < dataPoints.length; i++) {
-                this.drawLine(dataPoints, i, canvas, previousX, previousY, previousX + 27, dataPoints[i].y - dataPoints[i - 1].y + previousY);
-                previousX += 27;
-                previousY = dataPoints[i].y - dataPoints[i - 1].y + previousY;
-                // if previousY is bigger than graph height scale down y    
-            }
-        },
-        // drawTicks(c) {
-        //     for (let xy = 0; xy < 400; xy += 10) {
-        //         c.fillStyle = 'whitesmoke';
-        //         c.fillRect(0, xy, 3, 1);
-        //     }
-        // },
-        drawLine: function (dataPoints, i, c, x1, y1, x2, y2) {
-            var font = "8px LCD";
             var diff = dataPoints[dataPoints.length - 1].y - dataPoints[0].y;
+            var factor = 0;
             if (diff > 175) {
-                y1 *= 0.5;
-                y2 *= 0.5;
+                factor = 0.5;
             }
             else if (diff >= 145) {
-                y1 *= 0.75;
-                y2 *= 0.75;
+                factor = 0.75;
             }
             else if (diff >= 120) {
-                y1 *= 0.9;
-                y2 *= 0.9;
+                factor = 0.9;
             }
             else if (diff >= 90) {
-                y1 *= 1.1;
-                y2 *= 1.1;
+                factor = 1.1;
             }
             else {
-                y1 *= 1.5;
-                y2 *= 1.5;
+                factor = 1.5;
             }
+            for (var i = 1; i < dataPoints.length; i++) {
+                this.drawLine(dataPoints, i, canvas, previousX, previousY * factor, previousX + 27, (dataPoints[i].y - dataPoints[i - 1].y + previousY) * factor);
+                previousX += 27;
+                previousY += dataPoints[i].y - dataPoints[i - 1].y;
+            }
+        },
+        drawLine: function (dataPoints, i, c, x1, y1, x2, y2) {
+            var font = "8px LCD";
             if (i === 1) {
                 c.fillStyle = 'whitesmoke';
                 c.fillRect(x1 - 20, y1, 23, 1);

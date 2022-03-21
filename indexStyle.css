@@ -58,7 +58,8 @@ main {
     flex-wrap: wrap;
     justify-content: space-around;
 }
-canvas,table{
+
+canvas, table {
     margin-top: 20px;
 }
 
