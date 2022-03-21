@@ -7,7 +7,7 @@
    font-family: system-ui;
    text-shadow: 1px 1px 5px black;
    color: #bffaf4;
-   font-size: 18px;
+   
  }
 
  main {
@@ -44,6 +44,7 @@
    text-decoration: none;
    cursor: pointer;
    color: #bffaf4;
+   font-size: 18px;
  }
 
  body {
