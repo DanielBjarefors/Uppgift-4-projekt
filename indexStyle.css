@@ -27,7 +27,7 @@ a {
     font-size: 18px;
     display: block;
     border: 2px solid #bffaf4;
-    border-radius: 10%;
+    border-radius: 10px;
     color: whitesmoke;
     justify-content: center;
     text-align: center;
@@ -95,7 +95,7 @@ button {
     color: #bffaf4;
     padding: 10px;
     margin-bottom: 15px;
-    border-radius: 10%;
+    border-radius: 10px;
     border: 2px solid #bffaf4;
     cursor: pointer;
 }
