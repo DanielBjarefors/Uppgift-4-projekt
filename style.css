@@ -46,6 +46,11 @@
    color: #bffaf4;
    font-size: 18px;
  }
+ .disabled {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.6;
+}
 
  body {
    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%), 0 25px 50px 0 rgb(0 0 0 / 10%);
@@ -58,6 +63,7 @@
    background-image: url("https://free4kwallpapers.com/uploads/originals/2015/09/02/grey-honeycomb-pattern.jpg");
    background-size: cover;
    font-weight: 700;
+   font-size: 18px;
    background-color: gray;
    padding: 10px;
    margin-bottom: 15px;
@@ -105,14 +111,6 @@
    margin-right: 20px;
  }
  
-.canvas {
-  background-image: linear-gradient(rgba(85, 85, 85, 0.433), rgba(70, 70, 70, 0.638)), url("https://free4kwallpapers.com/uploads/originals/2015/09/02/grey-honeycomb-pattern.jpg");
-  background-size: auto;
-  border: 2px solid gray;
-   /* border-radius: 10px; */
-}
-
-
  table {
    color: #bffaf4;
    background-image: linear-gradient(rgba(85, 85, 85, 0.433), rgba(70, 70, 70, 0.638)), url("https://free4kwallpapers.com/uploads/originals/2015/09/02/grey-honeycomb-pattern.jpg");
@@ -148,11 +146,11 @@
  }
 
  @media (max-width:450px) {
-   html {
+   html, input, a {
      font-size: 13px;
+   }
+   li{
+    margin-right: 5px;
    }
 
-   input {
-     font-size: 13px;
-   }
  }
