@@ -50,7 +50,7 @@ Vue.createApp({
                         this.workoutWeightB = JSON.parse(window.localStorage.getItem('workoutWeight' + id));
                         this.workoutNrB = JSON.parse(window.localStorage.getItem('workoutNr' + id));
                         this.totalB = JSON.parse(window.localStorage.getItem('total' + id));
-                        this.loadCanvasData(this.dataPoints, this.canvasBench);
+                        this.loadCanvasData(this.dataPoints, this.canvasBench, name);
                         break;
                     case "Squat":
                         name = "Squat Progress"
@@ -58,21 +58,21 @@ Vue.createApp({
                         this.workoutWeightS = JSON.parse(window.localStorage.getItem('workoutWeight' + id));
                         this.workoutNrS = JSON.parse(window.localStorage.getItem('workoutNr' + id));
                         this.totalS = JSON.parse(window.localStorage.getItem('total' + id));
-                        this.loadCanvasData(this.dataPoints, this.canvasSquat);
+                        this.loadCanvasData(this.dataPoints, this.canvasSquat, name);
                         break;
                     case "Deadl":
                         name = "Deadlift Progress"
                         this.workoutWeightD = JSON.parse(window.localStorage.getItem('workoutWeight' + id));
                         this.workoutNrD = JSON.parse(window.localStorage.getItem('workoutNr' + id));
                         this.totalD = JSON.parse(window.localStorage.getItem('total' + id));
-                        this.loadCanvasData(this.dataPoints, this.canvasDeadl);
+                        this.loadCanvasData(this.dataPoints, this.canvasDeadl, name);
                         break;
                 }
             }
 
         },
 
-        loadCanvasData(dataPoints, canvas) {
+        loadCanvasData(dataPoints, canvas, name) {
             let previousX = 27;
             let previousY = 0;
             let diff = dataPoints[dataPoints.length - 1].y - dataPoints[0].y;
@@ -96,7 +96,7 @@ Vue.createApp({
             //loop values to draw line
             for (let i = 1; i < dataPoints.length; i++) {
 
-                this.drawLine(dataPoints, i, canvas, previousX, previousY * factor, previousX + 27,
+                this.drawLine(name,dataPoints, i, canvas, previousX, previousY * factor, previousX + 27,
                     (dataPoints[i].y - dataPoints[i - 1].y + previousY) * factor);
 
                 previousX += 27;
@@ -104,7 +104,7 @@ Vue.createApp({
             }
         },
         //draw graph and add numbers
-                drawLine(dataPoints, i, c, x1, y1, x2, y2) {
+                drawLine(name,dataPoints, i, c, x1, y1, x2, y2) {
             let font = "8px LCD"
             //set first value in graph
             if (i === 1) {
@@ -117,6 +117,8 @@ Vue.createApp({
                 c.fillStyle = '#bffaf4';
                 c.fillText(dataPoints[i - 1].y, x1 - 10, 140 - y1 - 3)
                 c.fillText(dataPoints[i - 1].x, x1, 150)
+                c.font = "12px LCD"
+                c.fillText(name, 150, 15)
                 c.restore();
             }
             //fill graph
