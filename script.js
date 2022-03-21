@@ -32,10 +32,12 @@ Vue.createApp({
             for (var i = 0; i < this.completedWorkouts.length; i++) {
                 this.completedWorkouts[i].workoutNr = this.completedWorkouts.length - i;
             }
+            //calculate new total for next workout
             this.total = 0;
             for (var i = 0; i < this.workoutWeight.length; i++) {
                 this.total += this.workoutWeight[i];
             }
+            //save uppdated data for finnished workouts and next workout
             window.localStorage.setItem('completedWorkouts' + this.id, JSON.stringify(this.completedWorkouts));
             window.localStorage.setItem('workoutWeight' + this.id, JSON.stringify(this.workoutWeight));
             window.localStorage.setItem('workoutNr' + this.id, JSON.stringify(this.workoutNr));
@@ -52,11 +54,11 @@ Vue.createApp({
             }),
                 //increase nr for next workout
                 this.workoutNr++;
-            //set weight for next workout
+            //set weight for next workout depending on reps
             for (var i = 0; i < this.workoutWeight.length; i++) {
                 this.reps[i] > 5 ? this.workoutWeight[i] += 5 : this.workoutWeight[i];
             }
-            //reset total for next workout
+            //calculate total for next workout
             this.total = 0;
             for (var i = 0; i < this.workoutWeight.length; i++) {
                 this.total += this.workoutWeight[i];

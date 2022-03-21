@@ -63,7 +63,6 @@ main {
 canvas, table {
     margin-top: 20px;
     border: 2px solid #bffaf4;
-
 }
 
 body {
@@ -74,7 +73,6 @@ body {
     background-size: cover;
     margin: auto;
     font-family: system-ui;
-
 }
 
 #Bench, #Squat, #Deadl {
@@ -90,7 +88,6 @@ button {
     background-size: auto;
     font-size: 18px;
     font-weight: 700;
-    /* background-color: gray; */
     color: #bffaf4;
     padding: 10px;
     margin-bottom: 15px;
@@ -103,18 +100,13 @@ button:hover, a:hover {
     opacity: calc(0.6);
 }
 
-
 canvas {
-    /* color: white; */
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%), 0 25px 50px 0 rgb(0 0 0 / 10%);
     background-image: linear-gradient(rgba(107, 107, 107, 0.337), rgba(75, 75, 75, 0.316)), url("https://free4kwallpapers.com/uploads/originals/2015/09/02/grey-honeycomb-pattern.jpg");
     background-size: auto;
     border-radius: 5px;
-    /* height: 300px;  */
-    width: 70%;
-    /* image-rendering: pixelated */
+    width: 95%;
 }
-
 
 
 table {
@@ -136,4 +128,9 @@ footer {
     font-weight: 700;
     min-height: 50px;
     padding-top: 5px;
+}
+@media(min-width:700px) {
+    canvas{
+        width: 70%;
+    }
 }
