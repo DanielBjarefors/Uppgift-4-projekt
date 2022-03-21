@@ -80,12 +80,14 @@ Vue.createApp({
             var name = "";
             var dataLength = 10;
             this.dataPoints = [];
+            //check if data exists in local storage and load
             var check = JSON.parse(window.localStorage.getItem('completedWorkouts' + id));
             if (check !== null) {
                 this.completedWorkouts = JSON.parse(window.localStorage.getItem('completedWorkouts' + id));
                 for (var i = 0; i < this.completedWorkouts.length; i++) {
                     this.dataPoints.unshift({ y: this.completedWorkouts[i].total, x: this.completedWorkouts[i].workoutNr });
                 }
+                // take last ten workouts
                 if (this.completedWorkouts.length > dataLength) {
                     var diff = this.completedWorkouts.length - dataLength;
                     this.dataPoints.splice(0, diff);
@@ -121,6 +123,7 @@ Vue.createApp({
             var previousY = 0;
             var diff = dataPoints[dataPoints.length - 1].y - dataPoints[0].y;
             var factor = 0;
+            //set factor for y-axis to better fill graph
             if (diff > 175) {
                 factor = 0.5;
             }
@@ -136,43 +139,50 @@ Vue.createApp({
             else {
                 factor = 1.5;
             }
+            //loop values to draw line
             for (var i = 1; i < dataPoints.length; i++) {
                 this.drawLine(dataPoints, i, canvas, previousX, previousY * factor, previousX + 27, (dataPoints[i].y - dataPoints[i - 1].y + previousY) * factor);
                 previousX += 27;
                 previousY += dataPoints[i].y - dataPoints[i - 1].y;
             }
         },
+        //draw graph and add numbers
         drawLine: function (dataPoints, i, c, x1, y1, x2, y2) {
             var font = "8px LCD";
+            //set first value in graph
             if (i === 1) {
-                c.fillStyle = 'whitesmoke';
+                c.fillStyle = '#00d2be';
                 c.fillRect(x1 - 20, y1, 23, 1);
                 c.fillRect(x1, y1 - 2, 1, 5);
                 c.save();
                 c.transform(1, 0, 0, -1, 0, 140);
                 c.font = font;
+                c.fillStyle = '#bffaf4';
                 c.fillText(dataPoints[i - 1].y, x1 - 10, 140 - y1 - 3);
                 c.fillText(dataPoints[i - 1].x, x1, 150);
                 c.restore();
             }
+            //fill graph
             c.beginPath();
-            c.strokeStyle = 'whitesmoke';
+            c.strokeStyle = '#00d2be';
             c.lineWidth = 1;
             c.moveTo(x1, y1);
             c.lineTo(x2, y2);
             c.stroke();
             c.closePath();
-            c.fillStyle = 'whitesmoke';
+            c.fillStyle = '#00d2be';
             c.fillRect(x2 - 20, y2, 23, 1);
             c.fillRect(x2, y2 - 2, 1, 5);
             c.fillRect(x2, -2, 1, 5);
             c.save();
             c.transform(1, 0, 0, -1, 0, 140);
             c.font = font;
+            c.fillStyle = '#bffaf4';
             c.fillText(dataPoints[i].y, x2 - 10, 140 - y2 - 3);
             c.fillText(dataPoints[i].x, x2, 150);
             c.restore();
         },
+        //set scale and increase resolution to unblur numbers
         setCanvasScale: function (canvas, htmlCanvas, e) {
             var size = 200;
             canvas.width = size;

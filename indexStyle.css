@@ -6,7 +6,7 @@ html {
     background-image: url("https://free4kwallpapers.com/uploads/originals/2015/09/02/grey-honeycomb-pattern.jpg");
     background-size: cover;
     text-align: center;
-    color: whitesmoke;
+    color: #bffaf4;
     font-weight: 700;
     min-height: 120px;
     margin: 0;
@@ -19,7 +19,7 @@ a {
     background-size: cover;
     font-size: 18px;
     display: block;
-    border: 2px solid gray;
+    border: 2px solid #bffaf4;
     border-radius: 10%;
     color: whitesmoke;
     justify-content: center;
@@ -27,6 +27,7 @@ a {
     padding: 5px;
     text-decoration: none;
     cursor: pointer;
+    color: #bffaf4;
 }
 
 ul {
@@ -61,6 +62,8 @@ main {
 
 canvas, table {
     margin-top: 20px;
+    border: 2px solid #bffaf4;
+
 }
 
 body {
@@ -87,11 +90,12 @@ button {
     background-size: auto;
     font-size: 18px;
     font-weight: 700;
-    background-color: gray;
-    color: whitesmoke;
+    /* background-color: gray; */
+    color: #bffaf4;
     padding: 10px;
     margin-bottom: 15px;
     border-radius: 10%;
+    border: 2px solid #bffaf4;
     cursor: pointer;
 }
 
@@ -101,7 +105,7 @@ button:hover, a:hover {
 
 
 canvas {
-    color: white;
+    /* color: white; */
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%), 0 25px 50px 0 rgb(0 0 0 / 10%);
     background-image: linear-gradient(rgba(107, 107, 107, 0.337), rgba(75, 75, 75, 0.316)), url("https://free4kwallpapers.com/uploads/originals/2015/09/02/grey-honeycomb-pattern.jpg");
     background-size: auto;
@@ -114,7 +118,7 @@ canvas {
 
 
 table {
-    color: white;
+    color: #bffaf4;
     background-image: linear-gradient(rgba(82, 81, 81, 0.35), rgba(67, 66, 66, 0.35)), url("https://free4kwallpapers.com/uploads/originals/2015/09/02/grey-honeycomb-pattern.jpg");
     background-size: auto;
     width: 20%;
@@ -127,7 +131,7 @@ footer {
     background-image: url("https://free4kwallpapers.com/uploads/originals/2015/09/02/grey-honeycomb-pattern.jpg");
     background-size: cover;
     text-align: center;
-    color: whitesmoke;
+    color: #bffaf4;
     font-family: system-ui;
     font-weight: 700;
     min-height: 50px;
