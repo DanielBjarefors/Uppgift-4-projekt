@@ -157,11 +157,6 @@ Vue.createApp({
     },
     mounted() {
 
-        // let htmlCanvas = []
-        // for (let [key, value] of Object.entries(this.$refs)) {            
-        //         htmlCanvas.push({ key: value })            
-        // }
-        
         this.canvasBench = this.$refs.Bench.getContext('2d');
         this.setCanvasScale(this.canvasBench, Object.entries(this.$refs), 0)
 
