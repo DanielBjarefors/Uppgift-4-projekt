@@ -185,25 +185,26 @@ Vue.createApp({
             c.restore();
         },
         //set scale and increase resolution to unblur numbers
-        setCanvasScale: function (canvas, refs, e) {
+        setCanvasScale: function (canvas, htmlCanvas, e) {
             var size = 200;
             canvas.width = size;
             canvas.height = size;
             var scale = window.devicePixelRatio + 2;
-            refs[e][1].width = Math.floor((size + 90) * scale);
-            refs[e][1].height = Math.floor((size - 45) * scale);
+            htmlCanvas[e].width = Math.floor((size + 90) * scale);
+            htmlCanvas[e].height = Math.floor((size - 45) * scale);
             canvas.scale(scale, scale);
             canvas.textAlign = 'center';
             canvas.transform(1, 0, 0, -1, 0, 140);
         }
     },
     mounted: function () {
+        this.htmlCanvas = document.querySelectorAll("canvas");
         this.canvasBench = this.$refs.Bench.getContext('2d');
-        this.setCanvasScale(this.canvasBench, Object.entries(this.$refs), 0);
+        this.setCanvasScale(this.canvasBench, this.htmlCanvas, 0);
         this.canvasSquat = this.$refs.Squat.getContext('2d');
-        this.setCanvasScale(this.canvasSquat, Object.entries(this.$refs), 1);
+        this.setCanvasScale(this.canvasSquat, this.htmlCanvas, 1);
         this.canvasDeadl = this.$refs.Deadl.getContext('2d');
-        this.setCanvasScale(this.canvasDeadl, Object.entries(this.$refs), 2);
+        this.setCanvasScale(this.canvasDeadl, this.htmlCanvas, 2);
         this.getData("Bench");
         this.getData("Squat");
         this.getData("Deadl");
