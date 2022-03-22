@@ -7,7 +7,7 @@ html {
   font-family: system-ui;
   text-shadow: 1px 1px 5px black;
   color: #bffaf4;
-  
+
 }
 
 main {
@@ -46,10 +46,11 @@ a {
   color: #bffaf4;
   font-size: 18px;
 }
+
 .disabled {
- pointer-events: none;
- cursor: default;
- opacity: 0.6;
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.6;
 }
 
 body {
@@ -59,16 +60,17 @@ body {
   background-size: cover;
   animation: fadeInAnimation ease 1.5s;
   animation-iteration-count: 1;
-  animation-fill-mode:forwards;
+  animation-fill-mode: forwards;
 }
 
 @keyframes fadeInAnimation {
- 0% {
-     opacity: 0;
- }
- 100% {
-     opacity: 1;
- }
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 
 }
 
@@ -162,8 +164,9 @@ footer {
   html, input, a {
     font-size: 13px;
   }
-  li{
-   margin-right: 5px;
+
+  li {
+    margin-right: 5px;
   }
 
 }
