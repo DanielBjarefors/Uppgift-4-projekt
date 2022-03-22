@@ -17,6 +17,7 @@ Vue.createApp({
     },
 
     methods: {
+
         //get sample workouts from json
         async loadSampleData() {
             window.localStorage.clear();
@@ -42,7 +43,7 @@ Vue.createApp({
                 // take last ten workouts
                 if (this.completedWorkouts.length > dataLength) {
                     let diff = this.completedWorkouts.length - dataLength;
-                    this.dataPoints.splice(0,diff)
+                    this.dataPoints.splice(0, diff)
                 }
                 switch (id) {
                     case "Bench":
@@ -96,7 +97,7 @@ Vue.createApp({
             //loop values to draw line
             for (let i = 1; i < dataPoints.length; i++) {
 
-                this.drawLine(name,dataPoints, i, canvas, previousX, previousY * factor, previousX + 27,
+                this.drawLine(name, dataPoints, i, canvas, previousX, previousY * factor, previousX + 27,
                     (dataPoints[i].y - dataPoints[i - 1].y + previousY) * factor);
 
                 previousX += 27;
@@ -104,7 +105,7 @@ Vue.createApp({
             }
         },
         //draw graph and add numbers
-                drawLine(name,dataPoints, i, c, x1, y1, x2, y2) {
+        drawLine(name, dataPoints, i, c, x1, y1, x2, y2) {
             let font = "8px LCD"
             //set first value in graph
             if (i === 1) {
@@ -142,29 +143,33 @@ Vue.createApp({
             c.restore();
         },
         //set scale and increase resolution to unblur numbers
-        setCanvasScale(canvas, htmlCanvas, e) {
+        setCanvasScale(canvas, refs, e) {
             var size = 200;
             canvas.width = size;
             canvas.height = size;
             var scale = window.devicePixelRatio + 2;
-            htmlCanvas[e].width = Math.floor((size + 90) * scale);
-            htmlCanvas[e].height = Math.floor((size - 45) * scale);
+            refs[e][1].width = Math.floor((size + 90) * scale);
+            refs[e][1].height = Math.floor((size - 45) * scale);
             canvas.scale(scale, scale);
             canvas.textAlign = 'center';
-            canvas.transform(1, 0, 0, -1, 0, 140);
+            canvas.transform(1, 0, 0, -1, 0, 140);           
         }
     },
     mounted() {
-        this.htmlCanvas = document.querySelectorAll("canvas");
 
+        // let htmlCanvas = []
+        // for (let [key, value] of Object.entries(this.$refs)) {            
+        //         htmlCanvas.push({ key: value })            
+        // }
+        
         this.canvasBench = this.$refs.Bench.getContext('2d');
-        this.setCanvasScale(this.canvasBench, this.htmlCanvas, 0)
+        this.setCanvasScale(this.canvasBench, Object.entries(this.$refs), 0)
 
         this.canvasSquat = this.$refs.Squat.getContext('2d');
-        this.setCanvasScale(this.canvasSquat, this.htmlCanvas, 1)
+        this.setCanvasScale(this.canvasSquat, Object.entries(this.$refs), 1)
 
         this.canvasDeadl = this.$refs.Deadl.getContext('2d');
-        this.setCanvasScale(this.canvasDeadl, this.htmlCanvas, 2)
+        this.setCanvasScale(this.canvasDeadl, Object.entries(this.$refs), 2)
 
         this.getData("Bench");
         this.getData("Squat")
