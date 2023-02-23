@@ -56,7 +56,7 @@ Vue.createApp({
                 this.workoutNr++;
             //set weight for next workout depending on reps
             for (var i = 0; i < this.workoutWeight.length; i++) {
-                this.reps[i] > 5 ? this.workoutWeight[i] += 5 : this.workoutWeight[i];
+                this.reps[i] > 5 ? this.workoutWeight[i] += 2.5 : this.workoutWeight[i];
             }
             //calculate total for next workout
             this.total = 0;
